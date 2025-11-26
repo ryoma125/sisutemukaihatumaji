@@ -12,7 +12,7 @@ $admin_name = isset($_SESSION["admin_name"]) ? $_SESSION["admin_name"] : "○○
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>売上管理</title>
-  <link rel="stylesheet" href="admin_sales.css">
+  <link rel="stylesheet" href="../admincss/admin_sales.css">
 </head>
 <body>
   <header class="header">

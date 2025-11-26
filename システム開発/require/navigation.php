@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calçar</title>
-  <link rel="stylesheet" href="navigation.css">
+      <link rel="stylesheet" href="../require.css/navigation.css">
 </head>
 <body>
   <header>

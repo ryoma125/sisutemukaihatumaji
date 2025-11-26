@@ -1,6 +1,7 @@
 <?php session_start();
- require '../require.php/db-connect.php'; 
+ require '../require/db-connect.php'; 
 $total = isset($_POST['total']) ? (int)$_POST['total'] : 0;
+$pdo = new PDO($connect, USER, PASS);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
