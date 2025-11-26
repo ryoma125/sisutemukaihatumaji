@@ -53,7 +53,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
   <meta charset="UTF-8">
   <title>会員情報変更 | Calçar</title>
-  <link rel="stylesheet" href="user_edit.css">
+  <link rel="stylesheet" href="../usercss/user_edit.css">
 </head>
 <body>
     <header>
