@@ -3,7 +3,7 @@ session_start();
 
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-require 'db-connect.php';
+require '../require/db-connect.php';
 
 // ログインしてなかったらログイン画面へ
 if (!isset($_SESSION['user_id'])) {
@@ -29,7 +29,7 @@ $show_confirmation = isset($_GET['confirm']) && $_GET['confirm'] === 'logout';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calçar - ユーザー情報</title>
-  <link rel="stylesheet" href="mypage.css">
+  <link rel="stylesheet" href="../usercss/mypage.css">
 </head>
 <body>
   <header>

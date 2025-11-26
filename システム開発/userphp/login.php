@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../usercss/login.css?v=<?php echo time(); ?>">
-    <title>ログイン画面 | Calçar</title>
-</head>
-<body>
-
-<?php
-session_start();
+<?php session_start();
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+ini_set('display_errors', '1');
+require '../require/db-connect.php';
+$pdo = new PDO($connect, USER, PASS);
 
-require '../require.php/db-connect.php';
-$pdo = connect();
 
 // POST が来た時のみログイン処理
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -33,17 +24,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($user && password_verify($pass, $user['password'])) {
                 session_regenerate_id(true);
 
-                $_SESSION['user_id']  = $user['user_id'];
+                $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['user_name'] = $user['name'];
 
-                // ★ ログイン後の画面へ
-                header('Location: index.html');
+                // ★ ここを index.html に変更 ★
+                header('Location: index.php');
                 exit;
 
             } else {
                 $error = "メールアドレスまたはパスワードが違います。";
             }
-
         } catch (Exception $e) {
             $error = "サーバーエラーが発生しました。時間を置いて再度お試しください。";
             error_log($e->getMessage());
@@ -51,29 +41,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../usercss/login.css?v=<?php echo time(); ?>">
+  <title>ログイン画面 | Calçar</title>
+</head>
+<body>
 <h1>Calçar</h1>
-
 <div class="container">
-    <h2>ログイン画面</h2>
+<h2>ログイン画面</h2>
 
-    <?php if (isset($error)): ?>
-        <p style="color:red;"><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></p>
-    <?php endif; ?>
+<?php if (isset($error)): ?>
+  <p style="color:red;"><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></p>
+<?php endif; ?>
 
-    <form method="post" autocomplete="off">
-        <label>メールアドレス</label><br>
-        <input type="email" name="email" required><br>
+<form method="post" autocomplete="off">
+  <label>メールアドレス</label><br>
+  <input type="email" name="email" required><br>
 
-        <label>パスワード</label><br>
-        <input type="password" name="password" required><br>
+  <label>パスワード</label><br>
+  <input type="password" name="password" required><br>
 
-        <button type="submit">ログイン</button>
-    </form>
+  <button type="submit">ログイン</button>
+</form>
 
-    <div class="signup-link">
-        <a href="register.php">新規会員登録はこちら</a>
-    </div>
+<div class="signup-link">
+  <a href="register.php">新規会員登録はこちら</a>
+</div>
 </div>
 
 </body>

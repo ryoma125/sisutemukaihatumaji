@@ -3,11 +3,7 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-<<<<<<< HEAD:shoze_size/22Asize.php
-require_once '../システム開発/require.php/db-connect.php';
-=======
-require_once '../システム開発/require/db_connect.php';
->>>>>>> main:shoze_size/shoze_22Asize .php
+require_once '../db_connect.php';
 
 // URLパラメータからサイズ取得（デフォルトは22.5）
 $size_param = $_GET['size'] ?? '22.5';
@@ -41,9 +37,17 @@ try {
     <link rel="stylesheet" href="../shoze_css/shoze_size.css">
 </head>
 <body>
-      
-        <?php require '../システム開発/require.php/navigation.php';?>
-    
+
+<header>
+    <a href="../index.html" class="logo-link">
+        <div class="logo">Calçar</div>
+    </a>
+    <nav class="nav">
+        <a href="../index.html">HOME</a>
+        <a href="#">SHOP</a>
+        <a href="#">ABOUT</a>
+    </nav>
+</header>
 
 <main>
     <h1><?= htmlspecialchars($display_size, ENT_QUOTES, 'UTF-8') ?> サイズ</h1>

@@ -1,15 +1,13 @@
 <?php
 session_start();
-require "../require.php/db-connect.php";
+require "../require/db-connect.php";
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 $user_id = $_SESSION['user_id']; // 仮のユーザーID
 
-$pdo = connect();
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+$pdo = new PDO($connect, USER, PASS);
 // ========================
 // カート内商品削除
 // ========================

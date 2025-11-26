@@ -3,7 +3,7 @@ session_start();
 
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-require 'db-connect.php';
+require '../require/db-connect.php';
 
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
@@ -53,7 +53,7 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 <head>
   <meta charset="UTF-8">
   <title>会員情報変更 | Calçar</title>
-  <link rel="stylesheet" href="user_edit.css">
+  <link rel="stylesheet" href="../usercss/user_edit.css">
 </head>
 <body>
     <header>
