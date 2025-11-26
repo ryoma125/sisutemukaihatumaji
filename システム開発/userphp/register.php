@@ -3,7 +3,7 @@
 session_start();
 
 // データベース接続用の関数を読み込む
-require_once '../require.php/db-connect.php';
+require_once '../require/db-connect.php';
 
 // データベースに接続
 $pdo = new PDO($connect, USER, PASS);

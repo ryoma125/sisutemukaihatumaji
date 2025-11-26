@@ -1,6 +1,6 @@
 <?php
 session_start();
-require "../require.php/db-connect.php";
+require "../require/db-connect.php";
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require '../require.php/db-connect.php';
+require '../require/db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 
 // ===== 注文処理などをここで実行 =====

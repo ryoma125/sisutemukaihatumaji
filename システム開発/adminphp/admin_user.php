@@ -5,7 +5,7 @@ if (empty($_SESSION["admin_login"])) {
     exit;
 }
 $admin_name = isset($_SESSION["admin_name"]) ? $_SESSION["admin_name"] : "○○";
-require_once "../require.php/db-connect.php";
+require_once "../require/db-connect.php";
 $pdo = new PDO($connect, USER, PASS);
 
 // ===== DB接続 =====
