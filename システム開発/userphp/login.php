@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="login.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="../usercss/login.css?v=<?php echo time(); ?>">
   <title>ログイン画面 | Calçar</title>
 </head>
 <body>
