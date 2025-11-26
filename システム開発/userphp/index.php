@@ -113,7 +113,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     <div class="recommend-slider">
       <?php
       $themes = [
-        ["link" => "osusume-cafe.php", "img" => "img/cafe (2).png", "text" => "カフェにおすすめ"],
+        ["link" => "osusume-cafe.php", "img" => "img/cafe.png", "text" => "カフェにおすすめ"],
         ["link" => "osusume-natu.php", "img" => "img/R.jpg", "text" => "夏におすすめ"],
         ["link" => "osusume-fuyu.php", "img" => "img/fuyu.png", "text" => "冬におすすめ"],
         ["link" => "osusume-autdoa.php", "img" => "img/autodoa.jpg", "text" => "アウトドアにおすすめ"],
