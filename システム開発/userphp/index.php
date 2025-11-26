@@ -39,7 +39,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         <a href="../shoze_size/shoze_30size.php"><button>30.0cm</button></a>
       </div>
     </aside>
-
+ 
     <!-- 右：おすすめ商品 -->
     <section class="products">
       <h2>オススメ</h2>
@@ -105,7 +105,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       </div>
     </section>
   </main>
-
+ 
   <!-- 下部テーマ部分 -->
   <section class="recommend-section">
     <div class="recommend-title">おすすめのテーマ</div>
