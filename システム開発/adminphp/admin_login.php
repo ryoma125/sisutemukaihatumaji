@@ -1,29 +1,51 @@
 <?php
+// エラー表示（デバッグ用、本番では削除）
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
 // セッション開始
 session_start();
 
+// データベース接続
+require '../require.php/db-connect.php';
+try {
+    $pdo = new PDO($connect, USER, PASS);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("データベース接続エラー: " . $e->getMessage());
+}
 
-// 仮のログイン情報（本番ではデータベースで管理してください）
-/*$admin_id = "admin";
-$password = "1234";
-$name = "Yoshii";*/
+$error_message = "";
 
 // ログインボタンが押されたときの処理
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $input_id = $_POST["admin-id"];
-    $input_pass = $_POST["password"];
-    $input_name = $_POST["name"];
+    $input_id = $_POST["admin-id"] ?? '';
+    $input_pass = $_POST["password"] ?? '';
+    $input_name = $_POST["name"] ?? '';
 
-    if ($input_id === $admin_id && $input_pass === $password && $input_name === $name) {
-        // 認証成功
-        $_SESSION["admin_login"] = true;
-        $_SESSION["admin_name"] = $name;
+    try {
+        // データベースから管理者情報を取得
+        $stmt = $pdo->prepare("SELECT * FROM Admin WHERE admin_id = ?");
+        $stmt->execute([$input_id]);
+        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // 🔥 ログイン成功後に admin_product.php へ遷移
-        header("Location: admin_product.php");
-        exit;
-    } else {
-        $error_message = "ID、パスワード、または名前が正しくありません。";
+        // 管理者が存在し、パスワードと名前が一致するか確認
+        if ($admin && $admin['password'] === $input_pass && $admin['admin_name'] === $input_name) {
+            // 認証成功
+            $_SESSION["admin_login"] = true;
+            $_SESSION["admin_name"] = $admin['admin_name'];
+            $_SESSION["admin_id"] = $admin['admin_id'];
+
+            // admin_product.php へ遷移
+            header("Location: admin_product.php");
+            exit;
+        } else {
+            $error_message = "ID、パスワード、または名前が正しくありません。";
+        }
+    } catch (PDOException $e) {
+        $error_message = "ログイン処理でエラーが発生しました。";
+        // デバッグ用（本番では削除）
+        // $error_message .= " エラー: " . $e->getMessage();
     }
 }
 ?>
