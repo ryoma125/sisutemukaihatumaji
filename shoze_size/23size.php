@@ -3,14 +3,20 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once '../システム開発/require.php/db_connect.php';
+require_once '../システム開発/require.php/db-connect.php';
 
-// ★ 23cm 固定
-$size_param = '23';   // 表示用
-$code = '23';         // Product.size に保存されている内部コード
+// URLパラメータからサイズ取得（デフォルトは23）
+$size_param = $_GET['size'] ?? '23';
 
+// 内部コード（23 はそのまま）
+$code = $size_param;
+
+// 表示用サイズはそのまま
+$display_size = $size_param;
+
+// Productテーブルから該当サイズの商品取得
 try {
-    $pdo = connect();
+    $pdo = connect(); // db_connect.phpのconnect()関数を使用
 
     $stmt = $pdo->prepare("SELECT * FROM Product WHERE size = :size");
     $stmt->bindValue(':size', $code, PDO::PARAM_STR);
@@ -27,24 +33,15 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calçar | <?= htmlspecialchars($size_param, ENT_QUOTES, 'UTF-8') ?></title>
+    <title>Calçar | <?= htmlspecialchars($display_size, ENT_QUOTES, 'UTF-8') ?></title>
     <link rel="stylesheet" href="../shoze_css/shoze_size.css">
 </head>
 <body>
-
-<header>
-    <a href="../index.html" class="logo-link">
-        <div class="logo">Calçar</div>
-    </a>
-    <nav class="nav">
-        <a href="../index.html">HOME</a>
-        <a href="#">SHOP</a>
-        <a href="#">ABOUT</a>
-    </nav>
-</header>
+      
+    <?php require '../システム開発/require.php/navigation.php';?>
 
 <main>
-    <h1><?= htmlspecialchars($size_param, ENT_QUOTES, 'UTF-8') ?> サイズ</h1>
+    <h1><?= htmlspecialchars($display_size, ENT_QUOTES, 'UTF-8') ?> サイズ</h1>
 
     <div class="product-grid" id="productGrid">
         <?php if(count($products) > 0): ?>

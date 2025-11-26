@@ -3,11 +3,7 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-<<<<<<< HEAD:shoze_size/22Asize.php
 require_once '../システム開発/require.php/db-connect.php';
-=======
-require_once '../システム開発/require/db_connect.php';
->>>>>>> main:shoze_size/shoze_22Asize .php
 
 // URLパラメータからサイズ取得（デフォルトは22.5）
 $size_param = $_GET['size'] ?? '22.5';
@@ -41,9 +37,8 @@ try {
     <link rel="stylesheet" href="../shoze_css/shoze_size.css">
 </head>
 <body>
-      
-        <?php require '../システム開発/require.php/navigation.php';?>
-    
+
+<?php require '../システム開発/require.php/navigation.php'; ?>
 
 <main>
     <h1><?= htmlspecialchars($display_size, ENT_QUOTES, 'UTF-8') ?> サイズ</h1>
@@ -52,10 +47,19 @@ try {
         <?php if(count($products) > 0): ?>
             <?php foreach($products as $p): ?>
                 <div class="product">
-                    <img src="<?= htmlspecialchars($p['image_url'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?>">
-                    <div class="product-brand"><?= htmlspecialchars($p['brand'], ENT_QUOTES, 'UTF-8') ?></div>
-                    <div class="product-name"><?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?></div>
+                    <!-- 商品画像をクリックで詳細ページへ -->
+                    <a href="product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>">
+                        <img src="<?= htmlspecialchars($p['image_url'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?>">
+                    </a>
+
+                    <!-- 商品名もクリックできる -->
+                    <a href="product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>" class="product-name-link">
+                        <div class="product-brand"><?= htmlspecialchars($p['brand'], ENT_QUOTES, 'UTF-8') ?></div>
+                        <div class="product-name"><?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?></div>
+                    </a>
+
                     <div class="product-price">¥<?= number_format($p['price']) ?></div>
+
                     <?php if($p['stock'] > 0): ?>
                         <div class="product-stock">在庫あり (<?= intval($p['stock']) ?>個)</div>
                     <?php else: ?>
