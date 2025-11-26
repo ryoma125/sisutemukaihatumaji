@@ -6,7 +6,7 @@ session_start();
 require_once '../require.php/db-connect.php';
 
 // データベースに接続
-$pdo = connect();
+$pdo = new PDO($connect, USER, PASS);
 
 // フォームがPOSTで送信されたときの処理
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

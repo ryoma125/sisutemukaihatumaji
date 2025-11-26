@@ -5,7 +5,7 @@ if (empty($_SESSION['admin_login'])) {
     exit;
 }
 $admin_name = $_SESSION['admin_name'] ? $_SESSION['admin_name'] : '○○';
-require "db-connect.php";
+require '../require.php/db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -65,7 +65,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>商品登録 - Calçar</title>
-  <link rel="stylesheet" href="admin_product.css">
+  <link rel="stylesheet" href="../admincss/admin_product.css">
 </head>
 <body>
   <header class="header">

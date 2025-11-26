@@ -7,9 +7,7 @@ error_reporting(E_ALL);
 
 $user_id = $_SESSION['user_id']; // 仮のユーザーID
 
-$pdo = connect();
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+$pdo = new PDO($connect, USER, PASS);
 // ========================
 // カート内商品削除
 // ========================

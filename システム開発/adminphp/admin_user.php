@@ -5,7 +5,7 @@ if (empty($_SESSION["admin_login"])) {
     exit;
 }
 $admin_name = isset($_SESSION["admin_name"]) ? $_SESSION["admin_name"] : "○○";
-require_once "db-connect.php";
+require_once "../require.php/db-connect.php";
 $pdo = new PDO($connect, USER, PASS);
 
 // ===== DB接続 =====
@@ -61,7 +61,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ユーザー削除 | Calçar 管理画面</title>
-    <link rel="stylesheet" href="admin_user.css">
+    <link rel="stylesheet" href="../admincss/admin_user.css">
 </head>
 <body>
 
