@@ -17,7 +17,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <?php 
 // ナビゲーションを読み込み
-require '../require.php/navigation.php'; 
+require '../require/navigation.php'; 
 ?>
 
 <div class="banner" style="background-image: url('img/flower.jpg');">雨におすすめ</div>
