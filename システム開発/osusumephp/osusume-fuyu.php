@@ -17,7 +17,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <?php 
 // ナビゲーションを読み込み
-require '../require/navigation.php'; 
+require '../osusumerequire/navigation.php'; 
 ?>
 
 <div class="banner" style="background-image: url('img/fuyu.png');">冬におすすめ</div>
