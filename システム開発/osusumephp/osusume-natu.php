@@ -1,7 +1,24 @@
-<?php session_start(); ?>
-<?php require 'header.php'; ?>
-<?php require 'navigation 1.php'; ?>
-<?php require 'footer.php'; ?>
+<?php
+// セッション開始（一番最初に実行）
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>夏におすすめ - Calçar</title>
+    <link rel="stylesheet" href="../osusumecss/osusume.css">
+    <link rel="stylesheet" href="../osusumecss/footer.css">
+</head>
+<body>
+
+<?php 
+// ナビゲーションを読み込み
+require '../require/navigation.php'; 
+?>
 
 <div class="banner" style="background-image: url('img/R.jpg');">夏におすすめ</div>
 
@@ -51,13 +68,16 @@
     ];
 
     foreach ($themes as $theme) {
-      echo '<div class="recommend-card">';
-      echo '<a href="' . htmlspecialchars($theme["link"]) . '">';
+      echo '<a href="' . htmlspecialchars($theme["link"]) . '" class="recommend-card">';
       echo '<img src="' . htmlspecialchars($theme["img"]) . '" alt="' . htmlspecialchars($theme["text"]) . '">';
       echo '<div class="text">' . htmlspecialchars($theme["text"]) . '</div>';
       echo '</a>';
-      echo '</div>';
     }
     ?>
   </div>
 </section>
+
+<footer></footer>
+
+</body>
+</html>
