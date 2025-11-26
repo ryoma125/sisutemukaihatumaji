@@ -2,10 +2,11 @@
 // セッション開始
 session_start();
 
+
 // 仮のログイン情報（本番ではデータベースで管理してください）
-$admin_id = "admin";
+/*$admin_id = "admin";
 $password = "1234";
-$name = "Yoshii";
+$name = "Yoshii";*/
 
 // ログインボタンが押されたときの処理
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
