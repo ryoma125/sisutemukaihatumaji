@@ -113,13 +113,13 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     <div class="recommend-slider">
       <?php
       $themes = [
-        ["link" => "osusume-cafe.php", "img" => "img/cafe.png", "text" => "カフェにおすすめ"],
-        ["link" => "osusume-natu.php", "img" => "img/R.jpg", "text" => "夏におすすめ"],
-        ["link" => "osusume-fuyu.php", "img" => "img/fuyu.png", "text" => "冬におすすめ"],
-        ["link" => "osusume-autdoa.php", "img" => "img/autodoa.jpg", "text" => "アウトドアにおすすめ"],
-        ["link" => "osusume-supot.php", "img" => "img/supotu.png", "text" => "スポーツにおすすめ"],
-        ["link" => "osusume-ame.php", "img" => "img/flower.jpg", "text" => "雨におすすめ"]
-      ];
+      ["link" => "../osusumephp/osusume-cafe.php", "img" => "../osusumephp/img/cafe (2).png", "text" => "カフェにおすすめ"],
+      ["link" => "../osusumephp/osusume-natu.php", "img" => "../osusumephp/img/R.jpg", "text" => "夏におすすめ"],
+      ["link" => "../osusumephp/osusume-fuyu.php", "img" => "../osusumephp/img/fuyu.png", "text" => "冬におすすめ"],
+      ["link" => "../osusumephp/osusume-autdoa.php", "img" => "../osusumephp/img/autodoa.jpg", "text" => "アウトドアにおすすめ"],
+      ["link" => "../osusumephp/osusume-supot.php", "img" => "../osusumephp/img/supotu.png", "text" => "スポーツにおすすめ"],
+      ["link" => "../osusumephp/osusume-ame.php", "img" => "../osusumephp/img/flower.jpg", "text" => "雨におすすめ"]
+    ];
 
       foreach ($themes as $theme) {
         echo '<div class="recommend-card">';
