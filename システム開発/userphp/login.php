@@ -2,7 +2,7 @@
 
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-require '../db-connect.php';
+require '../require/db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 
 

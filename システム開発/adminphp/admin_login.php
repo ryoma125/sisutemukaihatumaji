@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>管理者ログイン</title>
-  <link rel="stylesheet" href="/管理者側css/admin_login.css">
+  <link rel="stylesheet" href="../admincss/admin_login.css">
 </head>
 <body>
   <header>

@@ -3,7 +3,7 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once '../システム開発/require/db_connect.php';
+require_once '../db_connect.php';
 
 // URLパラメータからサイズ取得（デフォルトは22.5）
 $size_param = $_GET['size'] ?? '22.5';
