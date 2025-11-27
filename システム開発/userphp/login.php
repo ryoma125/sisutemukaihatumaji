@@ -5,10 +5,6 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 require '../require/db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
-// デバッグ用
-echo __DIR__;
-exit;
-
 
 
 // POST が来た時のみログイン処理
@@ -50,9 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="../usercss/login.css?v=<?php echo time(); ?>">
-  <style>
-      header { display: none !important; }
-  </style>
   <title>ログイン画面 | Calçar</title>
 </head>
 <body>
