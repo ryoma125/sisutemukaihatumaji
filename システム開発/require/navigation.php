@@ -1,5 +1,5 @@
 <?php
-// header.php
+// header.php（または navigation.php）
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -42,7 +42,7 @@
       <div class="line"></div>
 
       <!-- 🔽 サジェスト対応の検索フォーム -->
-      <form class="nav-search" method="get" action="../userphp/search.php" style="position: relative;">
+      <form class="nav-search" method="get" action="search.php" style="position: relative;">
         <label for="nav-search-input" class="sr-only">検索ワード</label>
 
         <input 
