@@ -38,7 +38,7 @@ try {
 </head>
 <body>
 
-<?php require '../システム開発/require.php/navigation.php'; ?>
+<?php require '../システム開発/require/navigation.php'; ?>
 
 <main>
     <h1><?= htmlspecialchars($display_size, ENT_QUOTES, 'UTF-8') ?> サイズ</h1>
