@@ -1,20 +1,25 @@
 <?php
-require "../require/db-connect.php";
+header('Content-Type: application/json');
+require_once '../require/dbconnect.php';
 
-$pdo = new PDO($dsn, $user, $pass);
+$keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : "";
 
-$keyword = $_GET['q'] ?? '';
-
-if ($keyword === '') {
+if ($keyword === "") {
     echo json_encode([]);
     exit;
 }
 
-$sql = "SELECT product_name FROM products WHERE product_name LIKE :kw LIMIT 10";
-$stmt = $pdo->prepare($sql);
-$stmt->bindValue(":kw", "%$keyword%", PDO::PARAM_STR);
-$stmt->execute();
+// 複数キーワード対応（最初の1語だけ候補に使う）
+$word = explode(" ", $keyword)[0];
 
-$names = $stmt->fetchAll(PDO::FETCH_COLUMN);
+$sql = "SELECT product_name FROM products
+        WHERE product_name LIKE :word
+        ORDER BY product_name ASC
+        LIMIT 5";
 
-echo json_encode($names);
+$stmt = $dbh->prepare($sql);
+$stmt->execute([":word" => "%{$word}%"]);
+
+echo json_encode($stmt->fetchAll(PDO::FETCH_ASSOC));
+exit;
+?>

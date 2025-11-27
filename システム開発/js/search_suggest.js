@@ -1,42 +1,29 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const input = document.getElementById("nav-search-input");
+// ---- サジェスト表示 ----
+function suggest() {
+    const key = document.getElementById("search").value;
 
-    if (!input) return;
+    if (key === "") {
+        document.getElementById("suggest-box").innerHTML = "";
+        return;
+    }
 
-    // サジェスト用コンテナ生成
-    const suggestionBox = document.createElement("div");
-    suggestionBox.style.position = "absolute";
-    suggestionBox.style.background = "#fff";
-    suggestionBox.style.border = "1px solid #ccc";
-    suggestionBox.style.width = input.offsetWidth + "px";
-    suggestionBox.style.zIndex = 1000;
-    input.parentNode.appendChild(suggestionBox);
-
-    input.addEventListener("keyup", () => {
-        const q = input.value;
-
-        if (q.length === 0) {
-            suggestionBox.innerHTML = "";
-            return;
-        }
-
-        fetch(`/suggest.php?q=${encodeURIComponent(q)}`)
-            .then(res => res.json())
-            .then(data => {
-                suggestionBox.innerHTML = "";
-                data.forEach(name => {
-                    const item = document.createElement("div");
-                    item.textContent = name;
-                    item.style.padding = "5px";
-                    item.style.cursor = "pointer";
-
-                    item.addEventListener("click", () => {
-                        input.value = name;
-                        suggestionBox.innerHTML = "";
-                    });
-
-                    suggestionBox.appendChild(item);
-                });
+    fetch("suggest.php?keyword=" + encodeURIComponent(key))
+        .then(res => res.json())
+        .then(data => {
+            let html = "";
+            data.forEach(item => {
+                html += `
+                    <div class="suggest-item" onclick="setWord('${item.product_name}')">
+                        ${item.product_name}
+                    </div>
+                `;
             });
-    });
-});
+            document.getElementById("suggest-box").innerHTML = html;
+        });
+}
+
+// ---- 候補クリック時に検索ボックスへセット ----
+function setWord(text) {
+    document.getElementById("search").value = text;
+    document.getElementById("suggest-box").innerHTML = "";
+}
