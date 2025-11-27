@@ -14,7 +14,7 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 </head>
 <body>
 
-  <?php require '../require.php/navigation.php'; ?>
+  <?php require '../require/navigation.php'; ?>
   
   <main>
     <!-- 左サイズ選択 -->
