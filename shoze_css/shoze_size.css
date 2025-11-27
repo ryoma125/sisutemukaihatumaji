@@ -1,52 +1,148 @@
-/* 商品全体のリンク設定 */
-.product a {
-    text-decoration: none; /* 下線なし */
-    color: inherit;        /* 文字色をそのまま */
-    display: block;        /* ブロック化でクリック範囲を広く */
-    transition: opacity 0.3s;
+/* ==============================
+   ページ全体のリセットと基本スタイル
+   ============================== */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
-.product a:hover {
-    opacity: 0.8; /* ホバーで少し透明になる */
-    cursor: pointer;
-}
-
-/* 商品名リンク用の調整 */
-.product-name-link {
-    display: block;
-    text-align: center;
-}
-
-/* ブランド名・商品名はリンク内に入れてるので色・装飾調整 */
-.product-brand, .product-name {
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
     color: #333;
-    font-weight: bold;
-    margin-top: 5px;
+    display: flex;
+    flex-direction: column; /* main と footer を縦に並べる */
+    min-height: 100vh;      /* 画面の高さに合わせる */
 }
 
-.product-brand {
-    font-size: 0.85em;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+main {
+    max-width: 1200px;
+    margin: 2rem auto 0 auto; /* 上マージンのみ */
+    padding: 0 1rem;
+    flex: 1; /* main が残りの高さを占める */
 }
 
-.product-name {
-    font-size: 16px;
-    line-height: 1.4;
+h1 {
+    text-align: left; /* 見出しも左寄せ */
+    margin-bottom: 2rem;
 }
 
-/* 商品画像のスタイルはそのまま */
+/* ==============================
+   商品グリッド
+   ============================== */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    justify-items: start; /* 左寄せ */
+}
+
+/* 商品カード */
+.product {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    padding: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.product:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* 商品リンク全体 */
+.product a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* 商品画像 */
 .product img {
     width: 100%;
-    height: 280px;
+    height: 250px;
     object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .product img:hover {
     transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* ブランド・商品名 */
+.product-brand {
+    font-size: 0.85em;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.5rem;
+}
+
+.product-name {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 0.25rem;
+    text-align: left; /* 左寄せ */
+}
+
+/* 商品名リンク */
+.product-name-link {
+    display: block;
+    text-align: left; /* 左寄せ */
+}
+
+/* 価格 */
+.product-price {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    text-align: left; /* 左寄せ */
+}
+
+/* 在庫情報 */
+.product-stock {
+    text-align: left; /* 左寄せ */
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: #28a745;
+}
+
+.product-stock.out-of-stock {
+    color: #dc3545;
+}
+
+/* 「商品なし」メッセージ */
+.no-products {
+    text-align: left; /* 左寄せ */
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 2rem;
+}
+
+/* ==============================
+   フッター
+   ============================== */
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    /* 背景色なし */
+}
+
+/* ==============================
+   レスポンシブ対応
+   ============================== */
+@media (max-width: 900px) {
+    .product img {
+        height: 200px;
+    }
+}
+
+@media (max-width: 600px) {
+    .product img {
+        height: 180px;
+    }
 }
