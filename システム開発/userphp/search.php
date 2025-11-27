@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once "../require/db-connect.php";
+require_once "../require/navigation.php";
 
 try {
     $pdo = new PDO($connect, USER, PASS);
