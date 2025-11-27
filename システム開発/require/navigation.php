@@ -17,7 +17,7 @@
       <div class="line"></div>
       <a href="./index.php">Home/Calçar</a>
       <div class="line"></div>
-      <form class="nav-search" method="get" action="/search.php">
+      <form class="nav-search" method="get" action="/userphp/search.php">
         <label for="nav-search-input" class="sr-only">検索ワード</label>
         <input id="nav-search-input" type="text" name="q" placeholder="search" />
         <button type="submit" class="search-btn">検索</button>
@@ -26,8 +26,9 @@
 
     <div class="icons">
       <a href="mypage.php" class="icon">👤</a>
-      <a href="cart.php" class="icon">🛒</a>
+      <a href="cart.php" class="icon">🛒</a> 
     </div>
+    <script src="/js/search_suggest.js"></script>
   </header>
 </body>
 </html>
