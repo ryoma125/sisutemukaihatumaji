@@ -42,7 +42,7 @@
       <div class="line"></div>
 
       <!-- 🔽 サジェスト対応の検索フォーム -->
-      <form class="nav-search" method="get" action="/userphp/search.php" style="position: relative;">
+      <form class="nav-search" method="get" action="../userphp/search.php" style="position: relative;">
         <label for="nav-search-input" class="sr-only">検索ワード</label>
 
         <input 
@@ -67,7 +67,7 @@
     </div>
 
     <!-- 🔽 サジェスト用 JavaScript -->
-    <script src="/js/search_suggest.js"></script>
+    <script src="../js/search_suggest.js"></script>
   </header>
 </body>
 </html>
