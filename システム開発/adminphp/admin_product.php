@@ -7,7 +7,7 @@ if (empty($_SESSION['admin_login'])) {
 $admin_name = $_SESSION['admin_name'] ? $_SESSION['admin_name'] : '○○';
 
 // データベース接続
-require_once __DIR__ . '/../require.php/db-connect.php';
+require_once __DIR__ . '/../require/db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
