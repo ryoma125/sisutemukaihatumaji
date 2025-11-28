@@ -7,15 +7,26 @@ error_reporting(E_ALL);
 session_start();
 
 // データベース接続
-require '../require.php/db-connect.php';
+$error_message = "";
+$pdo = null;
+
 try {
+    // db-connect.phpを読み込む
+    $db_path = __DIR__ . '/../require.php/db-connect.php';
+    
+    if (!file_exists($db_path)) {
+        throw new Exception("db-connect.phpが見つかりません: " . $db_path);
+    }
+    
+    require $db_path;
+    
+    // PDO接続を作成
     $pdo = new PDO($connect, USER, PASS);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $e) {
+    
+} catch (Exception $e) {
     die("データベース接続エラー: " . $e->getMessage());
 }
-
-$error_message = "";
 
 // ログインボタンが押されたときの処理
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -43,9 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $error_message = "ID、パスワード、または名前が正しくありません。";
         }
     } catch (PDOException $e) {
-        $error_message = "ログイン処理でエラーが発生しました。";
-        // デバッグ用（本番では削除）
-        // $error_message .= " エラー: " . $e->getMessage();
+        $error_message = "ログイン処理でエラーが発生しました: " . $e->getMessage();
     }
 }
 ?>

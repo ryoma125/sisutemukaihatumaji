@@ -5,7 +5,9 @@ if (empty($_SESSION['admin_login'])) {
     exit;
 }
 $admin_name = $_SESSION['admin_name'] ? $_SESSION['admin_name'] : '○○';
-require '../require/db-connect.php';
+
+// データベース接続
+require_once __DIR__ . '/../require.php/db-connect.php';
 $pdo = new PDO($connect, USER, PASS);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -71,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   <header class="header">
     <div class="logo">Calçar</div>
     <nav class="nav">
-      <a href="admin_product.php">商品登録</a>
+      <a href="admin_product.php" class="active">商品登録</a>
       <a href="admin_product_edit.php">商品管理</a>
       <a href="admin_user.php">ユーザー削除</a>
       <a href="admin_sales.php">売上管理</a>
