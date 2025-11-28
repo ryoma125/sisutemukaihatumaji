@@ -18,7 +18,7 @@ $error_message = "";
 
 try {
     // db-connect.phpを読み込む（require.phpフォルダから）
-    require_once __DIR__ . '/../require.php/db-connect.php';
+    require_once __DIR__ . '/../require/db-connect.php';
     
     // PDO接続を作成
     $pdo = new PDO($connect, USER, PASS);

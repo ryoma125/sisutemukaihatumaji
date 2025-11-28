@@ -14,7 +14,6 @@ $pdo = new PDO($connect, USER, PASS);
 <div class="modal">
     <h2>購入確定しますか？</h2>
 
-    <img src="shoe.jpg" alt="商品画像" class="product-image">
 
     <form action="order_complete.php" method="post">
         <div class="info-box">
@@ -28,8 +27,8 @@ $pdo = new PDO($connect, USER, PASS);
         </div>
 
         <div class="total">
-            <p>合計金額</p>
-            <p class="price">0000円</p>
+            <p>合計金額　<?php echo number_format($total); ?>円</p>
+            <input type="hidden" name="total" value="<?php echo htmlspecialchars($total, ENT_QUOTES, 'UTF-8'); ?>">
         </div>
 
         <div class="buttons">
