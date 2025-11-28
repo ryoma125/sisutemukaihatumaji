@@ -5,8 +5,9 @@ if (empty($_SESSION["admin_login"])) {
     exit;
 }
 $admin_name = isset($_SESSION["admin_name"]) ? $_SESSION["admin_name"] : "○○";
-require_once "../require/db-connect.php";
-$pdo = new PDO($connect, USER, PASS);
+
+// データベース接続
+require_once __DIR__ . '/../require.php/db-connect.php';
 
 // ===== DB接続 =====
 try {
@@ -71,11 +72,11 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <nav class="nav">
       <a href="admin_product.php">商品登録</a>
       <a href="admin_product_edit.php">商品管理</a>
-      <a href="admin_user.php">ユーザー削除</a>
+      <a href="admin_user.php" class="active">ユーザー削除</a>
       <a href="admin_sales.php">売上管理</a>
     </nav>
     <div class="welcome">ようこそ！<?php echo htmlspecialchars($admin_name, ENT_QUOTES, 'UTF-8'); ?>さん！</div>
-  </header>
+</header>
 
 
 <!-- ========== メイン ========== -->

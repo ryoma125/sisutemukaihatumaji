@@ -7,7 +7,7 @@ if (empty($_SESSION["admin_login"])) {
 $admin_name = isset($_SESSION["admin_name"]) ? $_SESSION["admin_name"] : "○○";
 
 // データベース接続
-require_once 'db-connect.php';
+require_once __DIR__ . '/../require.php/db-connect.php';
 
 try {
     $pdo = new PDO($connect, USER, PASS);
@@ -117,14 +117,14 @@ $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'manage';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>商品管理</title>
-    <link rel="stylesheet" href="admin_product_edit.css">
+    <link rel="stylesheet" href="../admincss/admin_product_edit.css">
 </head>
 <body>
     <header class="header">
         <div class="logo">Calçar</div>
         <nav class="nav">
             <a href="admin_product.php">商品登録</a>
-            <a href="admin_product_edit.php">商品管理</a>
+            <a href="admin_product_edit.php" class="active">商品管理</a>
             <a href="admin_user.php">ユーザー削除</a>
             <a href="admin_sales.php">売上管理</a>
         </nav>
