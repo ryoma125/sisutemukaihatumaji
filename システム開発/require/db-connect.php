@@ -5,4 +5,7 @@ const USER   ='LAA1607573';
 const PASS   ='teamYOSHII';
 
 $connect='mysql:host='.SERVER.';dbname='.DBNAME.';charset=utf8';
+
+
+
 ?>

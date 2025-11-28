@@ -3,15 +3,15 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once '../db_connect.php';
+require_once '../システム開発/require/db-connect.php';
 
-// URLパラメータからサイズ取得（デフォルトは22.5）
-$size_param = $_GET['size'] ?? '22.5';
+// URLパラメータからサイズ取得（デフォルトは27）
+$size_param = $_GET['size'] ?? '27';
 
-// 内部コードに変換（22.5 → 22A）
-$code = str_replace('.5', 'A', $size_param);
+// 内部コードに変換（27 → 27）
+$code = str_replace('.5', 'A', $size_param); // 27 はそのまま
 
-// 表示用サイズは元の値（22.5）
+// 表示用サイズは元の値（27）
 $display_size = $size_param;
 
 // Productテーブルから該当サイズの商品取得（size列で判別）
@@ -34,20 +34,13 @@ try {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calçar | <?= htmlspecialchars($display_size, ENT_QUOTES, 'UTF-8') ?></title>
+    
+    <link rel="stylesheet" href="../システム開発/require.css/navigation.css">
     <link rel="stylesheet" href="../shoze_css/shoze_size.css">
 </head>
 <body>
 
-<header>
-    <a href="../index.html" class="logo-link">
-        <div class="logo">Calçar</div>
-    </a>
-    <nav class="nav">
-        <a href="../index.html">HOME</a>
-        <a href="#">SHOP</a>
-        <a href="#">ABOUT</a>
-    </nav>
-</header>
+<?php require '../システム開発/require/navigation.php'; ?>
 
 <main>
     <h1><?= htmlspecialchars($display_size, ENT_QUOTES, 'UTF-8') ?> サイズ</h1>
@@ -56,10 +49,19 @@ try {
         <?php if(count($products) > 0): ?>
             <?php foreach($products as $p): ?>
                 <div class="product">
-                    <img src="<?= htmlspecialchars($p['image_url'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?>">
-                    <div class="product-brand"><?= htmlspecialchars($p['brand'], ENT_QUOTES, 'UTF-8') ?></div>
-                    <div class="product-name"><?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?></div>
+                    <!-- 商品画像をクリックで詳細ページへ -->
+                    <a href="product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>">
+                        <img src="<?= htmlspecialchars($p['image_url'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?>">
+                    </a>
+
+                    <!-- 商品名もクリックできる -->
+                    <a href="product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>" class="product-name-link">
+                        <div class="product-brand"><?= htmlspecialchars($p['brand'], ENT_QUOTES, 'UTF-8') ?></div>
+                        <div class="product-name"><?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?></div>
+                    </a>
+
                     <div class="product-price">¥<?= number_format($p['price']) ?></div>
+
                     <?php if($p['stock'] > 0): ?>
                         <div class="product-stock">在庫あり (<?= intval($p['stock']) ?>個)</div>
                     <?php else: ?>

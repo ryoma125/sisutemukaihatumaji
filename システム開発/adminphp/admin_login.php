@@ -12,7 +12,7 @@ $pdo = null;
 
 try {
     // db-connect.phpを読み込む
-    $db_path = __DIR__ . '/../require.php/db-connect.php';
+    $db_path = __DIR__ . '/../require/db-connect.php';
     
     if (!file_exists($db_path)) {
         throw new Exception("db-connect.phpが見つかりません: " . $db_path);
