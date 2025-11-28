@@ -5,13 +5,13 @@ error_reporting(E_ALL);
 
 require_once '../システム開発/require/db-connect.php';
 
-// URLパラメータからサイズ取得（デフォルトは22.5）
-$size_param = $_GET['size'] ?? '22.5';
+// URLパラメータからサイズ取得（デフォルトは26）
+$size_param = $_GET['size'] ?? '26';
 
-// 内部コードに変換（22.5 → 22A）
-$code = str_replace('.5', 'A', $size_param);
+// 内部コードに変換（26 → 26）
+$code = str_replace('.5', 'A', $size_param); // 26 はそのまま
 
-// 表示用サイズは元の値（22.5）
+// 表示用サイズは元の値（26）
 $display_size = $size_param;
 
 // Productテーブルから該当サイズの商品取得（size列で判別）

@@ -1,252 +1,148 @@
-
-/* h1の位置を少し上げる */
+/* ==============================
+   ページ全体のリセットと基本スタイル
+   ============================== */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
 body {
-  font-family: "Noto Sans JP", sans-serif;
-  margin: 0;
-  background: #fff;
-  color: #000;
-  overflow-y: scroll;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column; /* main と footer を縦に並べる */
+    min-height: 100vh;      /* 画面の高さに合わせる */
 }
 
-/* ===== ヘッダー固定 ===== */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 40px;
-  border-bottom: 1px solid #ccc;
-}
-
-/* ロゴのリンクスタイル */
-.logo-link {
-  text-decoration: none;
-  color: inherit;
-  transition: opacity 0.3s;
-}
-
-.logo-link:hover {
-  opacity: 0.7;
-}
-
-.logo {
-  font-weight: bold;
-  font-size: 1.5em;
-  cursor: pointer;
-}
-
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-
-.nav a {
-  text-decoration: none;
-  color: #333;
-  font-size: 14px;
-  transition: color 0.3s;
-}
-
-.nav a:hover {
-  color: #000;
-  font-weight: bold;
-}
-
-.search input {
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.icons {
-  display: flex;
-  gap: 20px;
-  font-size: 18px;
-  cursor: pointer;
-}
-
-/* ===== メインコンテンツ ===== */
 main {
-  padding: 60px 60px;
-  min-height: calc(100vh - 200px); /* フッターまでの最小高さ確保 */
+    max-width: 1200px;
+    margin: 2rem auto 0 auto; /* 上マージンのみ */
+    padding: 0 1rem;
+    flex: 1; /* main が残りの高さを占める */
 }
 
 h1 {
-  font-size: 40px;
-  margin-bottom: 40px;
-  text-align: left;
-  font-weight: 600;
+    text-align: left; /* 見出しも左寄せ */
+    margin-bottom: 2rem;
 }
 
+/* ==============================
+   商品グリッド
+   ============================== */
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    justify-items: start; /* 左寄せ */
 }
 
+/* 商品カード */
 .product {
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.3s;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    padding: 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .product:hover {
-  transform: translateY(-5px);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
+/* 商品リンク全体 */
+.product a {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* 商品画像 */
 .product img {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .product img:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* ブランド名 */
+/* ブランド・商品名 */
 .product-brand {
-  font-size: 0.85em;
-  color: #666;
-  margin-top: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+    font-size: 0.85em;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 0.5rem;
 }
 
 .product-name {
-  font-weight: bold;
-  margin-top: 5px;
-  font-size: 16px;
-  line-height: 1.4;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 0.25rem;
+    text-align: left; /* 左寄せ */
 }
 
+/* 商品名リンク */
+.product-name-link {
+    display: block;
+    text-align: left; /* 左寄せ */
+}
+
+/* 価格 */
 .product-price {
-  margin-top: 8px;
-  font-size: 18px;
-  font-weight: 600;
-  color: #000;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 0.5rem;
+    text-align: left; /* 左寄せ */
 }
 
-/* 在庫表示 */
+/* 在庫情報 */
 .product-stock {
-  font-size: 0.85em;
-  margin-top: 8px;
-  padding: 4px 8px;
-  border-radius: 4px;
-  display: inline-block;
+    text-align: left; /* 左寄せ */
+    margin-top: 0.25rem;
+    font-size: 0.85rem;
+    color: #28a745;
 }
 
-.product-stock {
-  color: #28a745;
-  background: #e8f5e9;
+.product-stock.out-of-stock {
+    color: #dc3545;
 }
 
-.out-of-stock {
-  color: #dc3545;
-  background: #ffebee;
-}
-
-/* 商品がない場合のメッセージ */
+/* 「商品なし」メッセージ */
 .no-products {
-  text-align: center;
-  padding: 80px 20px;
-  color: #999;
-  font-size: 18px;
-  grid-column: 1 / -1;
+    text-align: left; /* 左寄せ */
+    font-size: 1.2rem;
+    color: #888;
+    margin-top: 2rem;
 }
 
-/* ===== フッター ===== */
+/* ==============================
+   フッター
+   ============================== */
 footer {
-  margin-top: 60px;
-  padding: 20px 0;
-  background: #000;
-  color: #fff;
-  text-align: center;
+    text-align: center;
+    padding: 1rem 0;
+    /* 背景色なし */
 }
 
-footer p {
-  margin: 0;
-  font-size: 14px;
-}
-
-/* ===== レスポンシブ対応 ===== */
-@media (max-width: 1200px) {
-  .product-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-  }
-  
-  main {
-    padding: 50px 40px;
-  }
-  
-  h1 {
-    font-size: 36px;
-  }
-}
-
+/* ==============================
+   レスポンシブ対応
+   ============================== */
 @media (max-width: 900px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 30px;
-  }
-  
-  header {
-    padding: 10px 20px;
-  }
-  
-  .nav {
-    gap: 20px;
-  }
-  
-  main {
-    padding: 40px 30px;
-  }
-  
-  h1 {
-    font-size: 32px;
-  }
+    .product img {
+        height: 200px;
+    }
 }
 
 @media (max-width: 600px) {
-  .product-grid {
-    grid-template-columns: 1fr;
-    gap: 30px;
-  }
-  
-  header {
-    flex-direction: column;
-    gap: 15px;
-    padding: 15px 20px;
-  }
-  
-  .logo {
-    font-size: 1.3em;
-  }
-  
-  .nav {
-    gap: 15px;
-  }
-  
-  .nav a {
-    font-size: 13px;
-  }
-  
-  main {
-    padding: 30px 20px;
-  }
-  
-  h1 {
-    font-size: 28px;
-    margin-bottom: 30px;
-  }
-  
-  .product img {
-    height: auto;
-  }
+    .product img {
+        height: 180px;
+    }
 }
