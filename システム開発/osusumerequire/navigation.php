@@ -38,7 +38,7 @@
 
     <nav class="nav">
       <div class="line"></div>
-      <a href="./index.php">Home/Calçar</a>
+      <a href="../userphp/index.php">Home/Calçar</a>
       <div class="line"></div>
 
       <!-- 🔽 サジェスト対応の検索フォーム -->
@@ -62,8 +62,8 @@
     </nav>
 
     <div class="icons">
-      <a href="mypage.php" class="icon">👤</a>
-      <a href="cart.php" class="icon">🛒</a> 
+      <a href="../userphp/mypage.php" class="icon">👤</a>
+      <a href="../userphp/cart.php" class="icon">🛒</a> 
     </div>
 
     <!-- 🔽 サジェスト用 JavaScript -->
