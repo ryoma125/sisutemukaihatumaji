@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 // データベース接続
 require_once '../require/db-connect.php';
-$pdo = connect();
+$pdo = new PDO($connect, USER, PASS);
 
 // エラーメッセージ用変数
 $error = '';
