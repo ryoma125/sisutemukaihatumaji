@@ -16,7 +16,7 @@ $display_size = $size_param;
 
 // Productテーブルから該当サイズの商品取得（size列で判別）
 try {
-    $pdo = connect(); // db_connect.phpのconnect()関数を使用
+    $pdo = connect(); // db_connect.php の connect() 関数
 
     $stmt = $pdo->prepare("SELECT * FROM Product WHERE size = :size");
     $stmt->bindValue(':size', $code, PDO::PARAM_STR);
@@ -49,13 +49,14 @@ try {
         <?php if(count($products) > 0): ?>
             <?php foreach($products as $p): ?>
                 <div class="product">
-                    <!-- 商品画像をクリックで詳細ページへ -->
-                    <a href="product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>">
+
+                    <!-- 商品画像クリックで商品詳細へ -->
+                    <a href="../システム開発/userphp/product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>">
                         <img src="<?= htmlspecialchars($p['image_url'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?>">
                     </a>
 
-                    <!-- 商品名もクリックできる -->
-                    <a href="product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>" class="product-name-link">
+                    <!-- 商品名クリックでも商品詳細へ -->
+                    <a href="../システム開発/userphp/product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>" class="product-name-link">
                         <div class="product-brand"><?= htmlspecialchars($p['brand'], ENT_QUOTES, 'UTF-8') ?></div>
                         <div class="product-name"><?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?></div>
                     </a>
@@ -67,6 +68,7 @@ try {
                     <?php else: ?>
                         <div class="product-stock out-of-stock">在庫切れ</div>
                     <?php endif; ?>
+
                 </div>
             <?php endforeach; ?>
         <?php else: ?>
