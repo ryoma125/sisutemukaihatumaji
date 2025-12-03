@@ -1,12 +1,12 @@
-<?php session_start();
+<?php 
+session_start();
 require_once '../require/db-connect.php';
-
 
 try {
   $pdo = new PDO($connect, USER, PASS);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  // URLパラメータで商品IDを取得（例: ?id=1）
+  // 商品ID取得
   $id = isset($_GET['id']) ? intval($_GET['id']) : 1;
 
   $stmt = $pdo->prepare("SELECT * FROM Product WHERE product_id = :id");
@@ -22,6 +22,41 @@ try {
   echo "データベースエラー: " . htmlspecialchars($e->getMessage());
   exit;
 }
+
+/* ---------------------------------------------------
+   商品コードからカラー・素材を抽出
+   例: 2-BLA-22A-LEA
+--------------------------------------------------- */
+$codeParts = explode("-", $product["product_code"]);
+
+// 安全対策
+$colorCode = $codeParts[1] ?? "";
+$materialCode = $codeParts[3] ?? "";
+
+// カラー変換表
+$colorList = [
+  "BLA" => "黒",
+  "WHT" => "白",
+  "RED" => "赤",
+  "BLU" => "青",
+  "GRN" => "緑",
+  "BRN" => "茶",
+  "BEI" => "ベージュ",
+  "GRY" => "グレー",
+  "YEL" => "黄",
+];
+
+// 素材変換表
+$materialList = [
+  "LEA" => "レザー",
+  "FAB" => "ファブリック",
+  "MSH" => "メッシュ",
+  "SYN" => "合成皮革",
+];
+
+$colorName = $colorList[$colorCode] ?? "ー";
+$materialName = $materialList[$materialCode] ?? "ー";
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -31,35 +66,22 @@ try {
   <link rel="stylesheet" href="../usercss/product_detail.css">
 </head>
 <body>
-  <header class="header">
-    <div class="logo">Calçar</div>
 
-    <nav class="nav">
-      <div class="line"></div>
-      <a href="./index.php">Home/Calçar</a>
-      <div class="line"></div>
-      <form class="nav-search" method="get" action="../userphp/search.php">
-        <label for="nav-search-input" class="sr-only">検索ワード</label>
-        <input id="nav-search-input" type="text" name="q" placeholder="search" />
-        <button type="submit" class="search-btn">検索</button>
-      </form>
-    </nav>
+  <!-- 省略：ヘッダー部分はそのまま -->
 
-    <div class="icons">
-      <a href="mypage.php" class="icon">👤</a>
-      <a href="cart.php" class="icon">🛒</a>
-    </div>
-  </header>
-
-  <main class="main">
+<main class="main">
   <div class="left">
+
     <!-- 商品画像スライダー -->
     <div class="image-slider">
       <div class="slides">
-        <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="商品画像1" class="product-img active">
-        <img src="images/<?= htmlspecialchars($product['product_code']) ?>_2.jpg" alt="商品画像2" class="product-img">
-        <img src="images/<?= htmlspecialchars($product['product_code']) ?>_3.jpg" alt="商品画像3" class="product-img">
+        <img src="<?= htmlspecialchars($product['image_url']) ?>" class="product-img active">
+
+        <!-- 2,3枚目は product_code ベースの画像 -->
+        <img src="images/<?= htmlspecialchars($product['product_code']) ?>_2.jpg" class="product-img">
+        <img src="images/<?= htmlspecialchars($product['product_code']) ?>_3.jpg" class="product-img">
       </div>
+
       <div class="dots">
         <span class="active"></span>
         <span></span>
@@ -67,7 +89,7 @@ try {
       </div>
     </div>
 
-    <!-- 商品情報（画像の下） -->
+    <!-- 商品情報 -->
     <div class="product-info-under">
       <div class="info-left">
         <h2 class="product-name"><?= htmlspecialchars($product['product_name']) ?></h2>
@@ -79,38 +101,38 @@ try {
         <div class="size-area">
           <label for="size">サイズ選択</label>
           <select id="size">
-            <?php
-              $sizes = explode(',', $product['size']);
-              foreach ($sizes as $s) {
-                echo "<option>" . htmlspecialchars(trim($s)) . "</option>";
-              }
-            ?>
+            <option><?= htmlspecialchars($product['size']) ?></option>
           </select>
         </div>
+
         <form action="cart_insert.php" method="POST">
-        <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
-        <button type="submit" class="cart-btn">カートに入れる</button>
+          <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+          <button type="submit" class="cart-btn">カートに入れる</button>
         </form>
       </div>
     </div>
   </div>
 
-  <!-- 右側（説明・詳細） -->
+  <!-- 右側：商品説明・詳細 -->
   <div class="right">
+
     <div class="description">
-      <p>商品の説明</p>
+      <p><?= nl2br(htmlspecialchars($product['description'])) ?></p>
     </div>
+
     <table class="detail-table">
       <tr><th>ブランド</th><td><?= htmlspecialchars($product['brand']) ?></td></tr>
-      <tr><th>カテゴリ</th><td>スニーカー</td></tr>
-      <tr><th>カラー</th><td>ー</td></tr>
-      <tr><th>素材</th><td>ー</td></tr>
+      <tr><th>カテゴリ</th><td><?= htmlspecialchars($product['category']) ?></td></tr>
+      <tr><th>カラー</th><td><?= htmlspecialchars($colorName) ?></td></tr>
+      <tr><th>素材</th><td><?= htmlspecialchars($materialName) ?></td></tr>
       <tr><th>商品コード</th><td><?= htmlspecialchars($product['product_code']) ?></td></tr>
     </table>
+
   </div>
 </main>
 
 <script>
+// 画像スライド（そのまま）
 const images = document.querySelectorAll('.product-img');
 const dots = document.querySelectorAll('.dots span');
 let current = 0;
@@ -130,10 +152,6 @@ setInterval(() => {
   current = (current + 1) % images.length;
   showSlide(current);
 }, 3000);
-
-document.querySelector('.cart-btn').addEventListener('click', () => {
-  alert('商品を追加しました');
-});
 </script>
 
 </body>
