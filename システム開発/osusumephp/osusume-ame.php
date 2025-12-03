@@ -16,7 +16,6 @@ if (session_status() === PHP_SESSION_NONE) {
 <body>
 
 <?php 
-// ナビゲーションを読み込み
 require '../osusumerequire/navigation.php'; 
 ?>
 
@@ -25,28 +24,30 @@ require '../osusumerequire/navigation.php';
 <section class="products">
   <div class="product-list">
     <?php
-    $products = [
-      ["id" => 1, "img" => "img/kutu-naname.png", "name" => "サンダル", "price" => 2500],
-      ["id" => 2, "img" => "img/kurokutu-naname.png", "name" => "黒靴", "price" => 3200],
-      ["id" => 3, "img" => "img/sirokutu-naname.png", "name" => "白靴", "price" => 2800],
-      ["id" => 4, "img" => "img/karafuru-yoko.png", "name" => "カラフルサンダル", "price" => 3000]
-    ];
+    // Product テーブルから雨におすすめの商品を取得する想定
+    require "../require/db-connect.php";
+    $pdo = new PDO($connect, USER, PASS);
 
-    foreach ($products as $product) {
-      echo '<form method="POST" action="cart.php" class="product">';
+    $stmt = $pdo->query("
+        SELECT product_id, product_name, price, image_url
+        FROM Product
+        WHERE product_id IN (1,2,3,4)  /* ← 必要なら変更 */
+    ");
+
+    while ($product = $stmt->fetch(PDO::FETCH_ASSOC)) {
+      echo '<form method="POST" action="cart_add.php" class="product">';
       
-      // 画像をリンクで囲む
-      echo '<a href="product_detail.php?id=' . $product["id"] . '">';
-      echo '<img src="' . htmlspecialchars($product["img"]) . '" alt="靴">';
+      echo '<a href="product_detail.php?id=' . $product["product_id"] . '">';
+      echo '<img src="' . htmlspecialchars($product["image_url"]) . '" alt="靴">';
       echo '</a>';
       
       echo '<div class="product-name">';
-      echo htmlspecialchars($product["name"]);
+      echo htmlspecialchars($product["product_name"]);
       echo '</div>';
+
       echo '<p>価格：¥' . number_format($product["price"]) . '</p>';
-      echo '<input type="hidden" name="product_id" value="' . $product["id"] . '">';
-      echo '<input type="hidden" name="name" value="' . htmlspecialchars($product["name"]) . '">';
-      echo '<input type="hidden" name="price" value="' . $product["price"] . '">';
+
+      echo '<input type="hidden" name="product_id" value="' . $product["product_id"] . '">';
       echo '<button type="submit" class="btn">カートに追加</button>';
       echo '</form>';
     }
