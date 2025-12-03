@@ -137,7 +137,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           <div class="left">
             <p>カテゴリー カラー サイズ 素材</p>
             <p><strong>例）1-BLA-26A-LEA</strong></p>
-            <p>　　夏　黒　26.5　レザー</p>
+            <p>　　春　黒　26.5　レザー</p>
           </div>
           <div class="right">
             <p>サイズの.5のサイズは〇〇Aと表記</p>
