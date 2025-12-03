@@ -1,5 +1,5 @@
 <?php
-// セッション開始（一番最初に実行）
+// セッション開始
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -23,35 +23,36 @@ require '../osusumerequire/navigation.php';
 
 <section class="products">
   <div class="product-list">
+
     <?php
-    // Product テーブルから雨におすすめの商品を取得する想定
-    require "../require/db-connect.php";
-    $pdo = new PDO($connect, USER, PASS);
+    // ★ 固定商品の配列（DBは使わない）
+    $products = [
+      ["id" => 101, "img" => "img/kutu-naname.png",  "name" => "サンダル",         "price" => 2500],
+      ["id" => 102, "img" => "img/kurokutu-naname.png", "name" => "黒靴",          "price" => 3200],
+      ["id" => 103, "img" => "img/sirokutu-naname.png", "name" => "白靴",          "price" => 2800],
+      ["id" => 104, "img" => "img/karafuru-yoko.png",   "name" => "カラフルサンダル", "price" => 3000]
+    ];
 
-    $stmt = $pdo->query("
-        SELECT product_id, product_name, price, image_url
-        FROM Product
-        WHERE product_id IN (1,2,3,4)  /* ← 必要なら変更 */
-    ");
+    foreach ($products as $product) {
 
-    while ($product = $stmt->fetch(PDO::FETCH_ASSOC)) {
-      echo '<form method="POST" action="cart_add.php" class="product">';
-      
-      echo '<a href="product_detail.php?id=' . $product["product_id"] . '">';
-      echo '<img src="' . htmlspecialchars($product["image_url"]) . '" alt="靴">';
+      echo '<form method="POST" action="../userphp/cart_insert.php" class="product">';
+
+      // 画像リンク
+      echo '<a href="product_detail.php?id=' . $product["id"] . '">';
+      echo '<img src="' . htmlspecialchars($product["img"]) . '" alt="靴">';
       echo '</a>';
-      
-      echo '<div class="product-name">';
-      echo htmlspecialchars($product["product_name"]);
-      echo '</div>';
 
+      echo '<div class="product-name">' . htmlspecialchars($product["name"]) . '</div>';
       echo '<p>価格：¥' . number_format($product["price"]) . '</p>';
 
-      echo '<input type="hidden" name="product_id" value="' . $product["product_id"] . '">';
+      // ★ カートに送るのは「product_id だけ」でOK（DBは触らない）
+      echo '<input type="hidden" name="product_id" value="' . $product["id"] . '">';
+
       echo '<button type="submit" class="btn">カートに追加</button>';
       echo '</form>';
     }
     ?>
+
   </div>
 </section>
 
