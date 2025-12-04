@@ -1,271 +1,42 @@
-body {
-  font-family: 'Noto Sans JP', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #fff;
-  color: #000;
-}
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 18px 40px;
-  border-bottom: 1px solid #ccc;
-  background-color: #fff;
-}
-
-/* ====== ロゴ ====== */
-.logo {
-  font-weight: 700;
-  font-size: 18px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-/* ====== ナビ部分 ====== */
-.nav {
-  display: flex;
-  align-items: center;
-  gap: 25px;
-}
-
-/* 細い線 */
-.line {
-  width: 25px;
-  height: 1px;
-  background-color: #333;
-}
-
-/* Home/Calçar */
-.nav a {
-  color: #555;
-  font-size: 12px;
-  text-decoration: none;
-}
-
-/* ====== 検索フォーム ====== */
-.nav-search {
-  display: flex;
-  align-items: center;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 3px 5px;
-  background-color: #fff;
-}
-
-.nav-search input {
-  border: none;
-  outline: none;
-  font-size: 12px;
-  width: 120px;
-  color: #888;
-}
-
-.nav-search input::placeholder {
-  color: #ccc;
-}
-
-/* 検索ボタン */
-.search-btn {
-  border: 1px solid #ddd;
-  background-color: #f8f8f8;
-  border-radius: 4px;
-  padding: 4px 10px;
-  font-size: 12px;
-  color: #333;
-  margin-left: 5px;
-  cursor: pointer;
-}
-
-.search-btn:hover {
-  background-color: #eaeaea;
-}
-
-/* ====== アイコン部分 ====== */
-.icons {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  font-size: 17px;
-}
-
-.icon {
-  color: #333;
-  text-decoration: none;
-}
-
-/* ====== アクセシビリティ対応 ====== */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-
-.breadcrumb {
-  font-size: 14px;
-  color: #555;
-}
-
-.search-area {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.search-area input {
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 5px 10px;
-}
-
-.icon {
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.main {
-  display: flex;
-  padding: 40px 60px;
-  justify-content: space-between;
-}
-
-.left {
-  width: 60%;
-}
-
-.product-img {
-  width: 100%;
-  max-width: 480px;
-  border: 1px solid #ccc;
-}
-
-.dots {
-  text-align: center;
-  margin: 10px 0;
-}
-
-.dots span {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ccc;
-  margin: 0 3px;
-}
-
-.dots .active {
-  background: #000;
-}
-
-.info h2 {
-  font-size: 20px;
-  margin-top: 20px;
-}
-
-.info h2 span {
-  color: #aaa;
-  margin-left: 8px;
-}
-
-.info p {
-  margin: 5px 0;
-  font-size: 16px;
-}
-
-.size-area {
-  margin-top: 10px;
-}
-
-.size-area select {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.cart-btn {
-  display: block;
-  margin-top: 20px;
-  background: #222;
-  color: #fff;
-  border: none;
-  padding: 10px 50px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.cart-btn:hover {
-  opacity: 0.8;
-}
-
-.right {
-  width: 35%;
-}
-
-.description {
-  border: 1px solid #000;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 20px;
-  font-size: 18px;
-}
-
-.detail-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.detail-table th, .detail-table td {
-  border: 1px solid #000;
-  padding: 8px;
-  font-size: 14px;
-  text-align: left;
-}
-
-.detail-table th {
-  width: 30%;
-}
-
-
-
-
 .image-slider {
   position: relative;
   width: 100%;
-  text-align: center;
+  max-width: 420px;   /* お好みで変更可 */
+  height: 420px;      /* ← 高さ固定が重要。全部同じサイズに揃う */
+  margin: 0 auto;
+  overflow: hidden;
 }
 
 .slides {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  height: 100%;
 }
 
+/* 画像を正方形に中央トリミング */
 .product-img {
-  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  max-width: 400px;
-  height: auto;
+  height: 100%;
+  object-fit: cover;   /* ← これが中央を綺麗に切り取る */
   border-radius: 10px;
-  margin: 0 auto;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
+/* 表示中の画像 */
 .product-img.active {
-  display: block;
+  opacity: 1;
 }
 
+/* ドット */
 .dots {
-  text-align: center;
-  margin-top: 10px;
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .dots span {
@@ -274,7 +45,7 @@ header {
   height: 10px;
   border-radius: 50%;
   background: #ccc;
-  margin: 0 5px;
+  margin: 0 6px;
   cursor: pointer;
 }
 
@@ -282,54 +53,3 @@ header {
   background: #000;
 }
 
-
-
-
-
-.product-info-under {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-top: 25px;
-  padding: 0 10px;
-}
-
-.info-left h2 {
-  font-size: 20px;
-  margin-bottom: 6px;
-}
-
-.info-left p {
-  margin: 3px 0;
-}
-
-.info-right {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 10px;
-}
-
-.size-area label {
-  margin-right: 6px;
-}
-
-.size-area select {
-  padding: 4px 8px;
-  border-radius: 4px;
-  border: 1px solid #aaa;
-}
-
-.cart-btn {
-  background-color: black;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.cart-btn:hover {
-  background-color: #333;
-}
