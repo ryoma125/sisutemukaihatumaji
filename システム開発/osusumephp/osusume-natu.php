@@ -26,27 +26,27 @@ require '../osusumerequire/navigation.php';
   <div class="product-list">
     <?php
     $products = [
-      ["id" => 1, "img" => "img/natu1-naname.png", "name" => "黒靴", "price" => 2500],
-      ["id" => 2, "img" => "img/natu2-naname.png", "name" => "サンダル", "price" => 3200],
-      ["id" => 3, "img" => "img/natu3-naname.png", "name" => "白靴", "price" => 2800],
-      ["id" => 4, "img" => "img/natu4-naname.png", "name" => "カラフルサンダル", "price" => 3000]
+      ["id" => 117, "img" => "img/natu1-naname.png", "name" => "黒靴", "price" => 2500],
+      ["id" => 118, "img" => "img/natu2-naname.png", "name" => "サンダル", "price" => 3200],
+      ["id" => 119, "img" => "img/natu3-naname.png", "name" => "白靴", "price" => 2800],
+      ["id" => 120, "img" => "img/natu4-naname.png", "name" => "カラフルサンダル", "price" => 3000]
     ];
 
     foreach ($products as $product) {
-      echo '<form method="POST" action="cart.php" class="product">';
-      
-      // 画像をリンクで囲む
+ 
+      echo '<form method="POST" action="../userphp/cart_insert.php" class="product">';
+ 
+      // 画像リンク
       echo '<a href="product_detail.php?id=' . $product["id"] . '">';
       echo '<img src="' . htmlspecialchars($product["img"]) . '" alt="靴">';
       echo '</a>';
-      
-      echo '<div class="product-name">';
-      echo htmlspecialchars($product["name"]);
-      echo '</div>';
+ 
+      echo '<div class="product-name">' . htmlspecialchars($product["name"]) . '</div>';
       echo '<p>価格：¥' . number_format($product["price"]) . '</p>';
+ 
+      // ★ カートに送るのは「product_id だけ」でOK（DBは触らない）
       echo '<input type="hidden" name="product_id" value="' . $product["id"] . '">';
-      echo '<input type="hidden" name="name" value="' . htmlspecialchars($product["name"]) . '">';
-      echo '<input type="hidden" name="price" value="' . $product["price"] . '">';
+ 
       echo '<button type="submit" class="btn">カートに追加</button>';
       echo '</form>';
     }
