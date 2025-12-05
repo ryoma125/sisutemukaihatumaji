@@ -1,6 +1,7 @@
 <?php
 session_start();
 require "../require/db-connect.php";
+require '../require/navigation.php';
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -95,6 +96,7 @@ foreach ($cart_items as $item) {
   <?php endif; ?>
 
 </div>
+<footer></footer>
 
 </body>
 </html>

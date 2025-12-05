@@ -1,7 +1,7 @@
 <?php 
 session_start();
 require_once '../require/db-connect.php';
-
+require '../require/navigation.php';
 try {
   $pdo = new PDO($connect, USER, PASS);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -153,6 +153,6 @@ setInterval(() => {
   showSlide(current);
 }, 3000);
 </script>
-
+<footer></footer>
 </body>
 </html>
