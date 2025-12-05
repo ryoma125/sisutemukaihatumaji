@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../システム開発/require/db-connect.php';
-
+require '../システム開発/require/navigation.php';
 // URLパラメータからサイズ取得（デフォルトは22.5）
 $size_param = $_GET['size'] ?? '30.5';
 
@@ -40,7 +40,6 @@ try {
 </head>
 <body>
 
-<?php require '../システム開発/require/navigation.php'; ?>
 
 <main>
     <h1><?= htmlspecialchars($display_size, ENT_QUOTES, 'UTF-8') ?> サイズ</h1>
