@@ -1,9 +1,32 @@
+/* 全体レイアウト */
+body {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #fafafa;
+  color: #333;
+}
+
+main.main {
+  display: flex;
+  justify-content: space-between;
+  max-width: 1000px;
+  margin: 40px auto;
+  gap: 40px;
+}
+
+/* 左側：画像と商品情報 */
+.left {
+  flex: 1;
+}
+
+/* 商品画像スライダー */
 .image-slider {
   position: relative;
   width: 100%;
-  max-width: 420px;   /* お好みで変更可 */
-  height: 420px;      /* ← 高さ固定が重要。全部同じサイズに揃う */
-  margin: 0 auto;
+  max-width: 320px;   /* 好みに合わせて調整 */
+  height: 320px;
+  margin: 0 auto 20px;
   overflow: hidden;
 }
 
@@ -13,20 +36,18 @@
   height: 100%;
 }
 
-/* 画像を正方形に中央トリミング */
 .product-img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;   /* ← これが中央を綺麗に切り取る */
+  object-fit: cover;
   border-radius: 10px;
   opacity: 0;
   transition: opacity 0.4s ease;
 }
 
-/* 表示中の画像 */
 .product-img.active {
   opacity: 1;
 }
@@ -53,3 +74,93 @@
   background: #000;
 }
 
+/* 商品情報 */
+.product-info-under {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;   /* ← 位置を下げる */
+}
+
+.info-left {
+  flex: 1;
+}
+
+.product-name {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.price,
+.shipping {
+  font-size: 16px;
+  margin: 4px 0;
+}
+
+.info-right {
+  flex: 1;
+  text-align: right;
+}
+
+.size-area {
+  margin-bottom: 10px;
+}
+
+.cart-btn {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.cart-btn:hover {
+  background-color: #555;
+}
+
+/* 右側：商品説明・詳細 */
+.right {
+  flex: 1;
+}
+
+/* 説明部分を四角で囲む＋位置を下げる */
+.description {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 15px;
+  background-color: #fff;
+  margin-top: 40px;   /* ← 位置を下げる */
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+/* 商品詳細表 */
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.detail-table th,
+.detail-table td {
+  border: 1px solid #ccc;   /* 枠線 */
+  padding: 10px 12px;
+  text-align: left;
+}
+
+.detail-table th {
+  background-color: #f0f0f0; /* 見出しセルの背景色 */
+  width: 30%;                /* 左側の幅を固定 */
+  font-weight: bold;
+}
+
+.detail-table td {
+  background-color: #fff;
+}
+
+/* 行ごとに交互の背景色 */
+.detail-table tr:nth-child(even) td {
+  background-color: #fafafa;
+}
