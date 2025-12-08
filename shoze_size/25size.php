@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../システム開発/require/db-connect.php';
-
+require '../システム開発/require/navigation.php';
 // URLパラメータからサイズ取得（デフォルトは22.5）
 $size_param = $_GET['size'] ?? '25';
 
@@ -16,7 +16,8 @@ $display_size = $size_param;
 
 // Productテーブルから該当サイズの商品取得（size列で判別）
 try {
-    $pdo = connect(); // db_connect.phpのconnect()関数を使用
+    $pdo =  new PDO($connect, USER, PASS);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $pdo->prepare("SELECT * FROM Product WHERE size = :size");
     $stmt->bindValue(':size', $code, PDO::PARAM_STR);

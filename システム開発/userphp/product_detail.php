@@ -148,7 +148,6 @@ setInterval(() => {
   showSlide(current);
 }, 3000);
 </script>
-
 <footer></footer>
 </body>
 </html>

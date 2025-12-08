@@ -1,5 +1,5 @@
 <?php
-// セッション開始（一番最初に実行）
+// セッション開始
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -16,7 +16,6 @@ if (session_status() === PHP_SESSION_NONE) {
 <body>
 
 <?php 
-// ナビゲーションを読み込み
 require '../osusumerequire/navigation.php'; 
 ?>
 
@@ -24,33 +23,36 @@ require '../osusumerequire/navigation.php';
 
 <section class="products">
   <div class="product-list">
+
     <?php
+    // ★ 固定商品の配列（DBは使わない）
     $products = [
-      ["id" => 1, "img" => "img/kutu-naname.png", "name" => "サンダル", "price" => 2500],
-      ["id" => 2, "img" => "img/kurokutu-naname.png", "name" => "黒靴", "price" => 3200],
-      ["id" => 3, "img" => "img/sirokutu-naname.png", "name" => "白靴", "price" => 2800],
-      ["id" => 4, "img" => "img/karafuru-yoko.png", "name" => "カラフルサンダル", "price" => 3000]
+      ["id" => 101, "img" => "img/kutu-naname.png",  "name" => "サンダル",         "price" => 2500],
+      ["id" => 102, "img" => "img/kurokutu-naname.png", "name" => "黒靴",          "price" => 3200],
+      ["id" => 103, "img" => "img/sirokutu-naname.png", "name" => "白靴",          "price" => 2800],
+      ["id" => 104, "img" => "img/karafuru-yoko.png",   "name" => "カラフルサンダル", "price" => 3000]
     ];
 
     foreach ($products as $product) {
-      echo '<form method="POST" action="cart.php" class="product">';
-      
-      // 画像をリンクで囲む
+
+      echo '<form method="POST" action="../userphp/cart_insert.php" class="product">';
+
+      // 画像リンク
       echo '<a href="product_detail.php?id=' . $product["id"] . '">';
       echo '<img src="' . htmlspecialchars($product["img"]) . '" alt="靴">';
       echo '</a>';
-      
-      echo '<div class="product-name">';
-      echo htmlspecialchars($product["name"]);
-      echo '</div>';
+
+      echo '<div class="product-name">' . htmlspecialchars($product["name"]) . '</div>';
       echo '<p>価格：¥' . number_format($product["price"]) . '</p>';
+
+      // ★ カートに送るのは「product_id だけ」でOK（DBは触らない）
       echo '<input type="hidden" name="product_id" value="' . $product["id"] . '">';
-      echo '<input type="hidden" name="name" value="' . htmlspecialchars($product["name"]) . '">';
-      echo '<input type="hidden" name="price" value="' . $product["price"] . '">';
+
       echo '<button type="submit" class="btn">カートに追加</button>';
       echo '</form>';
     }
     ?>
+
   </div>
 </section>
 

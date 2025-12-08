@@ -21,16 +21,19 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $code = $_POST["code"];
     $brand = $_POST["brand"];
     $size = $_POST["size"];
+    $category = $_POST["category"];
+    $description = $_POST["description"];
+
 
     try {
         if (!empty($name) && !empty($price) && !empty($shipping_fee) && !empty($stock) && !empty($code)) {
             // Productテーブルに商品登録
             $stmt = $pdo->prepare("
                 INSERT INTO Product
-                (product_name, product_code, brand, size, price, stock, shipping_fee)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                (product_name, product_code, brand, size, price, stock, shipping_fee, category, description)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
             ");
-            $stmt->execute([$name, $code, $brand, $size, $price, $stock, $shipping_fee]);
+            $stmt->execute([$name, $code, $brand, $size, $price, $stock, $shipping_fee, $category, $description]);
             $product_id = $pdo->lastInsertId(); // 登録された商品のIDを取得
 
             // 複数画像アップロード処理
@@ -71,15 +74,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 </head>
 <body>
   <header class="header">
-    <div class="logo">Calçar</div>
-    <nav class="nav">
-      <a href="admin_product.php" class="active">商品登録</a>
-      <a href="admin_product_edit.php">商品管理</a>
-      <a href="admin_user.php">ユーザー削除</a>
-      <a href="admin_sales.php">売上管理</a>
-    </nav>
-    <div class="welcome">ようこそ！<?php echo htmlspecialchars($admin_name, ENT_QUOTES, 'UTF-8'); ?>さん！</div>
-  </header>
+        <div class="logo">Calçar</div>
+        <nav class="nav">
+            <a href="admin_product.php">商品登録</a>
+            <a href="admin_product_edit.php" class="active">商品管理</a>
+            <a href="admin_user.php">ユーザー削除</a>
+            <a href="admin_sales.php">売上管理</a>
+        </nav>
+        <div class="welcome">ようこそ！<?php echo htmlspecialchars($admin_name, ENT_QUOTES, 'UTF-8'); ?>さん！</div>
+    </header>
 
   <main class="main">
     <?php if ($message): ?>
@@ -87,49 +90,67 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     <?php endif; ?>
 
     <form class="product-form" method="POST" enctype="multipart/form-data">
-      <div class="form-row">
-        <div class="form-group">
-          <label>商品名</label>
-          <input type="text" name="name" required>
-        </div>
-        <div class="form-group">
-          <label>価格</label>
-          <input type="number" name="price" required>
-        </div>
-        <div class="form-group">
-          <label>送料</label>
-          <input type="number" name="shipping_fee" required>
-        </div>
-        <div class="form-group">
-          <label>在庫数</label>
-          <input type="number" name="stock" required>
-        </div>
+
+  <div class="form-grid">
+
+    <div class="form-group">
+      <label>商品名</label>
+      <input type="text" name="name" required>
+    </div>
+
+    <div class="form-group">
+      <label>価格</label>
+      <input type="number" name="price" required>
+    </div>
+
+    <div class="form-group">
+      <label>送料</label>
+      <input type="number" name="shipping_fee" required>
+    </div>
+
+    <div class="form-group">
+      <label>在庫数</label>
+      <input type="number" name="stock" required>
+    </div>
+
+    <div class="form-group">
+      <label>商品コード</label>
+      <input type="text" name="code" required>
+    </div>
+
+    <div class="form-group">
+      <label>ブランド</label>
+      <input type="text" name="brand">
+    </div>
+
+    <div class="form-group">
+      <label>サイズ</label>
+      <input type="text" name="size">
+    </div>
+
+    <div class="form-group">
+      <label>カテゴリー</label>
+      <input type="text" name="category" required>
+    </div>
+
+    <div class="form-group full">
+      <label>商品の説明</label>
+      <textarea name="description"></textarea>
+    </div>
+      <div class="upload-box">
+        <input type="file" name="images" accept="image/*" class="full-width" multiple>
+        <i class="fa-solid fa-camera"></i>
+        <p class="upload-text">画像をアップロード</p>
       </div>
 
-      <div class="form-row">
-        <div class="upload-box">
-          <label>商品画像（複数可）</label>
-          <input type="file" name="images[]" accept="image/*" multiple required>
-          <p>アップロード</p>
-        </div>
+  </div>
 
-        <div class="form-group">
-          <label>商品コード</label>
-          <input type="text" name="code" required>
-        </div>
-        <div class="form-group">
-          <label>ブランド</label>
-          <input type="text" name="brand">
-        </div>
-        <div class="form-group">
-          <label>サイズ</label>
-          <input type="text" name="size">
-        </div>
-      </div>
+  <div class="btn-wrap">
+    <button type="submit">登録</button>
+  </div>
 
-      <div class="btn-wrap">
-        <button type="submit">登録</button>
-      </div>
+</form>
+
 
       <div class="info-section">
         <h3>商品コード定義</h3>
@@ -145,7 +166,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
           </div>
         </div>
       </div>
-    </form>
   </main>
 </body>
 </html>
