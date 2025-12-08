@@ -16,7 +16,8 @@ $display_size = $size_param;
 
 // Productテーブルから該当サイズの商品取得（size列で判別）
 try {
-    $pdo = connect(); // db_connect.phpのconnect()関数を使用
+    $pdo =  new PDO($connect, USER, PASS);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     $stmt = $pdo->prepare("SELECT * FROM Product WHERE size = :size");
     $stmt->bindValue(':size', $code, PDO::PARAM_STR);
