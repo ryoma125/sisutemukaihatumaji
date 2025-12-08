@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* ==============================
    ページ全体のリセットと基本スタイル
    ============================== */
@@ -12,19 +13,19 @@ body {
     background-color: #f9f9f9;
     color: #333;
     display: flex;
-    flex-direction: column; /* main と footer を縦に並べる */
-    min-height: 100vh;      /* 画面の高さに合わせる */
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 main {
     max-width: 1200px;
-    margin: 2rem auto 0 auto; /* 上マージンのみ */
+    margin: 2rem auto 0 auto;
     padding: 0 1rem;
-    flex: 1; /* main が残りの高さを占める */
+    flex: 1;
 }
 
 h1 {
-    text-align: left; /* 見出しも左寄せ */
+    text-align: left;
     margin-bottom: 2rem;
 }
 
@@ -35,10 +36,12 @@ h1 {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1.5rem;
-    justify-items: start; /* 左寄せ */
+    justify-content: start; /* カード全体を左寄せに配置 */
 }
 
-/* 商品カード */
+/* ==============================
+   商品カード
+   ============================== */
 .product {
     background-color: #fff;
     border-radius: 10px;
@@ -52,14 +55,16 @@ h1 {
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* 商品リンク全体 */
+/* 全リンク（画像や名前） */
 .product a {
     text-decoration: none;
     color: inherit;
     display: block;
 }
 
-/* 商品画像 */
+/* ==============================
+   商品画像
+   ============================== */
 .product img {
     width: 100%;
     height: 250px;
@@ -73,7 +78,14 @@ h1 {
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* ブランド・商品名 */
+/* ==============================
+   ブランド・商品名
+   ============================== */
+.product-name-link {
+    display: block;
+    text-align: left;
+}
+
 .product-brand {
     font-size: 0.85em;
     color: #666;
@@ -86,26 +98,24 @@ h1 {
     font-size: 1rem;
     font-weight: bold;
     margin-top: 0.25rem;
-    text-align: left; /* 左寄せ */
+    text-align: left;
 }
 
-/* 商品名リンク */
-.product-name-link {
-    display: block;
-    text-align: left; /* 左寄せ */
-}
-
-/* 価格 */
+/* ==============================
+   価格
+   ============================== */
 .product-price {
     font-size: 1rem;
     font-weight: bold;
     margin-top: 0.5rem;
-    text-align: left; /* 左寄せ */
+    text-align: left;
 }
 
-/* 在庫情報 */
+/* ==============================
+   在庫情報
+   ============================== */
 .product-stock {
-    text-align: left; /* 左寄せ */
+    text-align: left;
     margin-top: 0.25rem;
     font-size: 0.85rem;
     color: #28a745;
@@ -115,9 +125,11 @@ h1 {
     color: #dc3545;
 }
 
-/* 「商品なし」メッセージ */
+/* ==============================
+   商品なしメッセージ
+   ============================== */
 .no-products {
-    text-align: left; /* 左寄せ */
+    text-align: left;
     font-size: 1.2rem;
     color: #888;
     margin-top: 2rem;
@@ -129,9 +141,8 @@ h1 {
 footer {
     text-align: center;
     padding: 1rem 0;
-    background-color: #000;
+    background-color: #000; /* コメント修正 */
     color: #fff;
-    /* 背景色なし */
 }
 
 /* ==============================

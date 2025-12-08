@@ -69,20 +69,11 @@ $materialName = $materialList[$materialCode] ?? "ー";
 <main class="main">
   <div class="left">
 
-    <!-- 商品画像スライダー -->
-    <div class="image-slider">
-      <div class="slides">
-        <img src="<?= htmlspecialchars($product['image_url']) ?>" class="product-img active">
-        <img src="images/<?= htmlspecialchars($product['product_code']) ?>_2.jpg" class="product-img">
-        <img src="images/<?= htmlspecialchars($product['product_code']) ?>_3.jpg" class="product-img">
-      </div>
+    <!-- 商品画像（スライダーなし） -->
+  <div class="image">
+    <img src="<?= htmlspecialchars($product['image_url']) ?>" class="product-img">
+  </div>
 
-      <div class="dots">
-        <span class="active"></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
 
     <!-- 商品情報 -->
     <div class="product-info-under">
@@ -126,28 +117,6 @@ $materialName = $materialList[$materialCode] ?? "ー";
   </div>
 </main>
 
-<script>
-// スライダー動作
-const images = document.querySelectorAll('.product-img');
-const dots = document.querySelectorAll('.dots span');
-let current = 0;
-function showSlide(index) {
-  images.forEach((img, i) => {
-    img.classList.toggle('active', i === index);
-    dots[i].classList.toggle('active', i === index);
-  });
-}
-dots.forEach((dot, i) => {
-  dot.addEventListener('click', () => {
-    current = i;
-    showSlide(i);
-  });
-});
-setInterval(() => {
-  current = (current + 1) % images.length;
-  showSlide(current);
-}, 3000);
-</script>
 <footer></footer>
 </body>
 </html>
