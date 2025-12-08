@@ -194,3 +194,18 @@ textarea {
     max-width: 100%;
     box-sizing: border-box;
 }
+
+#previewArea {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+#previewArea img {
+  width: 500px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
