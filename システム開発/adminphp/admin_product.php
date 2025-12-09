@@ -138,9 +138,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
       <textarea name="description"></textarea>
     </div>
       <div class="upload-box">
-        <input type="file" name="images" accept="image/*" class="full-width" multiple>
+        <input type="file" name="images" id="imageInput" accept="image/*" class="full-width" multiple>
         <i class="fa-solid fa-camera"></i>
         <p class="upload-text">画像をアップロード</p>
+        <div id="previewArea"></div>
       </div>
 
   </div>
@@ -167,5 +168,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
       </div>
   </main>
+  <script src="../js/admin_product.js"></script>
 </body>
 </html>

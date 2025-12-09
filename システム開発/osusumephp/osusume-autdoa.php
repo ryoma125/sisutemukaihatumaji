@@ -26,10 +26,10 @@ require '../osusumerequire/navigation.php';
   <div class="product-list">
     <?php
     $products = [
-      ["id" => 105, "img" => "img/autdoa1-naname.png", "name" => "サンダル", "price" => 2500],
-      ["id" => 106, "img" => "img/kurokutu-naname.png", "name" => "黒靴", "price" => 3200],
-      ["id" => 107, "img" => "img/sirokutu-naname.png", "name" => "白靴", "price" => 2800],
-      ["id" => 108, "img" => "img/karafuru-yoko.png", "name" => "カラフルサンダル", "price" => 3000]
+      ["id" => 105, "img" => "../jpg/43.png", "name" => "", "price" => 2500],
+      ["id" => 106, "img" => "../jpg/44.png", "name" => "", "price" => 3200],
+      ["id" => 107, "img" => "../jpg/5.png", "name" => "", "price" => 2800],
+      ["id" => 108, "img" => "../jpg/2.png", "name" => "", "price" => 3000]
     ];
 
     foreach ($products as $product) {
