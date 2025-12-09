@@ -133,6 +133,9 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     </div>
   </section>
 
-  <footer></footer>
+  <footer>
+    <p>&copy; 2024 Calçar. All rights reserved.</p>
+</footer>
+
 </body>
 </html>

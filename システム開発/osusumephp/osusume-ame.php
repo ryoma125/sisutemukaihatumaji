@@ -79,7 +79,9 @@ require '../osusumerequire/navigation.php';
   </div>
 </section>
 
-<footer></footer>
+<footer>
+    <p>&copy; 2024 Calçar. All rights reserved.</p>
+</footer>
 
 </body>
 </html>

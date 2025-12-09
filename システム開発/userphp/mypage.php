@@ -111,6 +111,8 @@ $show_confirmation = isset($_GET['confirm']) && $_GET['confirm'] === 'logout';
     <?php endif; ?>
   </main>
 
-<?php require '../require/footer.php'; ?>
+<footer>
+    <p>&copy; 2024 Calçar. All rights reserved.</p>
+</footer>
 </body>
 </html>
