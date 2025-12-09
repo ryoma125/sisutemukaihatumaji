@@ -99,3 +99,43 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
           } else {
             echo '<p style="grid-column: 1 / -1; text-align: center; padding: 40px;">現在、表示できる商品がありません。</p>';
+          }
+
+        } catch (PDOException $e) {
+          echo '<p style="grid-column: 1 / -1; text-align: center; padding: 40px; color: red;">商品の取得に失敗しました。</p>';
+        }
+        ?>
+      </div>
+    </section>
+  </main>
+ 
+  <!-- 下部テーマ部分 -->
+  <section class="recommend-section">
+    <div class="recommend-title">おすすめのテーマ</div>
+
+    <div class="recommend-slider">
+      <?php
+      $themes = [
+        ["link" => "../osusumephp/osusume-cafe.php", "img" => "../osusumephp/img/cafe (2).png", "text" => "カフェにおすすめ"],
+        ["link" => "../osusumephp/osusume-natu.php", "img" => "../osusumephp/img/R.jpg", "text" => "夏におすすめ"],
+        ["link" => "../osusumephp/osusume-fuyu.php", "img" => "../osusumephp/img/fuyu.png", "text" => "冬におすすめ"],
+        ["link" => "../osusumephp/osusume-autdoa.php", "img" => "../osusumephp/img/autodoa.jpg", "text" => "アウトドアにおすすめ"],
+        ["link" => "../osusumephp/osusume-supot.php", "img" => "../osusumephp/img/supotu.png", "text" => "スポーツにおすすめ"],
+        ["link" => "../osusumephp/osusume-ame.php", "img" => "../osusumephp/img/flower.jpg", "text" => "雨におすすめ"]
+      ];
+
+      foreach ($themes as $theme) {
+        echo '<div class="recommend-card">';
+        echo '<a href="' . htmlspecialchars($theme["link"]) . '">';
+        echo '<img src="' . htmlspecialchars($theme["img"]) . '" alt="' . htmlspecialchars($theme["text"]) . '">';
+        echo '</a>';
+        echo '<div class="text">' . htmlspecialchars($theme["text"]) . '</div>';
+        echo '</div>';
+      }
+      ?>
+    </div>
+  </section>
+
+  <footer></footer>
+</body>
+</html>
