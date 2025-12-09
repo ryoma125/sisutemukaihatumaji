@@ -27,10 +27,10 @@ require '../osusumerequire/navigation.php';
     <?php
     // ★ 固定商品の配列（DBは使わない）
     $products = [
-      ["id" => 101, "img" => "img/kutu-naname.png",  "name" => "サンダル",         "price" => 2500],
-      ["id" => 102, "img" => "img/kurokutu-naname.png", "name" => "黒靴",          "price" => 3200],
-      ["id" => 103, "img" => "img/sirokutu-naname.png", "name" => "白靴",          "price" => 2800],
-      ["id" => 104, "img" => "img/karafuru-yoko.png",   "name" => "カラフルサンダル", "price" => 3000]
+      ["id" => 101, "img" => "../jpg/17.png",  "name" => "サンダル",         "price" => 2500],
+      ["id" => 102, "img" => "../jpg/20.png", "name" => "黒靴",          "price" => 3200],
+      ["id" => 103, "img" => "../jpg/23.png", "name" => "白靴",          "price" => 2800],
+      ["id" => 104, "img" => "../jpg/13.png",   "name" => "カラフルサンダル", "price" => 3000]
     ];
 
     foreach ($products as $product) {

@@ -26,10 +26,10 @@ require '../osusumerequire/navigation.php';
   <div class="product-list">
     <?php
     $products = [
-      ["id" => 105, "img" => "../jpg/39.png", "name" => "", "price" => 2500],
-      ["id" => 106, "img" => "../jpg/40.png", "name" => "", "price" => 3200],
+      ["id" => 105, "img" => "../jpg/43.png", "name" => "", "price" => 2500],
+      ["id" => 106, "img" => "../jpg/44.png", "name" => "", "price" => 3200],
       ["id" => 107, "img" => "../jpg/5.png", "name" => "", "price" => 2800],
-      ["id" => 108, "img" => "", "name" => "", "price" => 3000]
+      ["id" => 108, "img" => "../jpg/2.png", "name" => "", "price" => 3000]
     ];
 
     foreach ($products as $product) {
