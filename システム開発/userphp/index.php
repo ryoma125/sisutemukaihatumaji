@@ -46,93 +46,56 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       <div class="product-grid">
         <?php
         try {
-          // Productテーブルから商品を取得（在庫があるものを6件）
-          $sql = "SELECT 
-                    product_id,
-                    product_name,
-                    product_code,
-                    brand,
-                    image_url,
-                    price,
-                    stock,
-                    shipping_fee
-                  FROM Product
-                  WHERE stock > 0
-                  ORDER BY product_id DESC
-                  LIMIT 6";
-          
+
+          // ============================
+          // ★ 重複商品名を除外し、ランダムで6商品表示 ★
+          // ============================
+          $sql = "
+            SELECT 
+                p.product_id,
+                p.product_name,
+                p.product_code,
+                p.brand,
+                p.image_url,
+                p.price,
+                p.stock
+            FROM Product p
+            INNER JOIN (
+                SELECT product_name, MIN(product_id) AS min_id
+                FROM Product
+                WHERE stock > 0
+                GROUP BY product_name
+            ) AS uniq
+                ON uniq.min_id = p.product_id
+            ORDER BY RAND()
+            LIMIT 6
+          ";
+
           $stmt = $pdo->query($sql);
           $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
           
           if (count($products) > 0) {
             foreach ($products as $product) {
-              // 画像URLの処理
+
               $image_url = !empty($product['image_url']) 
                 ? htmlspecialchars($product['image_url']) 
                 : 'https://via.placeholder.com/250x200?text=NoImage';
               
-              // 商品詳細ページへのリンク
               $detail_link = 'product_detail.php?id=' . $product['product_id'];
-              
+
               echo '<a href="' . $detail_link . '" class="product-item">';
               echo '<img src="' . $image_url . '" alt="' . htmlspecialchars($product['product_name']) . '">';
               echo '<div class="product-info">';
-              
-              // ブランド表示
+
               if (!empty($product['brand'])) {
                 echo '<div class="product-brand">' . htmlspecialchars($product['brand']) . '</div>';
               }
-              
-              // 商品名
+
               echo '<div class="product-name">' . htmlspecialchars($product['product_name']) . '</div>';
-              
-              // 価格
               echo '<div class="product-price">¥' . number_format($product['price']) . '</div>';
-              
+
               echo '</div>';
               echo '</a>';
             }
           } else {
-            // 商品がない場合
             echo '<p style="grid-column: 1 / -1; text-align: center; padding: 40px;">現在、表示できる商品がありません。</p>';
-          }
-        } catch (PDOException $e) {
-          echo '<p style="grid-column: 1 / -1; text-align: center; padding: 40px; color: red;">商品の取得に失敗しました。</p>';
-          // デバッグ用（本番環境では削除）
-          // echo '<p style="font-size: 12px;">' . $e->getMessage() . '</p>';
-        }
-        ?>
-      </div>
-    </section>
-  </main>
- 
-  <!-- 下部テーマ部分 -->
-  <section class="recommend-section">
-    <div class="recommend-title">おすすめのテーマ</div>
-
-    <div class="recommend-slider">
-      <?php
-      $themes = [
-      ["link" => "../osusumephp/osusume-cafe.php", "img" => "../osusumephp/img/cafe (2).png", "text" => "カフェにおすすめ"],
-      ["link" => "../osusumephp/osusume-natu.php", "img" => "../osusumephp/img/R.jpg", "text" => "夏におすすめ"],
-      ["link" => "../osusumephp/osusume-fuyu.php", "img" => "../osusumephp/img/fuyu.png", "text" => "冬におすすめ"],
-      ["link" => "../osusumephp/osusume-autdoa.php", "img" => "../osusumephp/img/autodoa.jpg", "text" => "アウトドアにおすすめ"],
-      ["link" => "../osusumephp/osusume-supot.php", "img" => "../osusumephp/img/supotu.png", "text" => "スポーツにおすすめ"],
-      ["link" => "../osusumephp/osusume-ame.php", "img" => "../osusumephp/img/flower.jpg", "text" => "雨におすすめ"]
-    ];
-
-      foreach ($themes as $theme) {
-        echo '<div class="recommend-card">';
-        echo '<a href="' . htmlspecialchars($theme["link"]) . '">';
-        echo '<img src="' . htmlspecialchars($theme["img"]) . '" alt="' . htmlspecialchars($theme["text"]) . '">';
-        echo '</a>';
-        echo '<div class="text">' . htmlspecialchars($theme["text"]) . '</div>';
-        echo '</div>';
-      }
-      ?>
-    </div>
-  </section>
-
-  <footer></footer>
-</body>
-</html>
