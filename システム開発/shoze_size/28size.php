@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require_once '../require/db-connect.php';
-require '../システム開発/require/navigation.php';
+require '../require/navigation.php';
 // URLパラメータからサイズ取得（デフォルトは22.5）
 $size_param = $_GET['size'] ?? '28';
 
