@@ -17,6 +17,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <?php 
 require '../osusumerequire/navigation.php'; 
+require "../require/db-connect.php";
 ?>
 
 <div class="banner" style="background-image: url('img/flower.jpg');">雨におすすめ</div>
