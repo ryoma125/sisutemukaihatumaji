@@ -93,22 +93,24 @@ $sizeItems = $stmt2->fetchAll(PDO::FETCH_ASSOC);
       <div class="info-right">
 
         <!-- サイズ選択 -->
-        <div class="size-area">
+       <div class="size-area">
+        <form action="cart_insert.php" method="POST">
           <label for="size">サイズ選択</label>
-          <form action="cart_insert.php" method="POST">
-              <select id="size" name="product_id">
-                  <?php foreach ($sizeItems as $item): ?>
-                    <option value="<?= $item['product_id'] ?>"
-                      <?= ($item['product_id'] == $product['product_id']) ? 'selected' : '' ?>>
-                        <?= convertSize($item['size']) ?>
-                    </option>
-                  <?php endforeach; ?>
-              </select>
+          <select id="size" name="product_id">
+            <?php foreach ($sizeItems as $item): ?>
+              <option value="<?= $item['product_id'] ?>"
+                <?= ($item['product_id'] == $product['product_id']) ? 'selected' : '' ?>>
+                  <?= convertSize($item['size']) ?>
+              </option>
+            <?php endforeach; ?>
+        </select>
 
-              <button type="submit" class="cart-btn">カートに入れる</button>
-          </form>
+      <div class="button-wrapper">
+        <button type="submit" class="cart-btn">カートに入れる</button>
+      </div>
+  </form>
+</div>
 
-        </div>
 
       </div>
     </div>
@@ -153,7 +155,6 @@ $sizeItems = $stmt2->fetchAll(PDO::FETCH_ASSOC);
       <tr><th>カラー</th><td><?= htmlspecialchars($colorName) ?></td></tr>
       <tr><th>素材</th><td><?= htmlspecialchars($materialName) ?></td></tr>
       <tr><th>商品コード</th><td><?= htmlspecialchars($product['product_code']) ?></td></tr>
-      <tr><th>現在のサイズ</th><td><?= convertSize($sizeCode) ?></td></tr>
     </table>
 
   </div>
