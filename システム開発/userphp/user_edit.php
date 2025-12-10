@@ -107,5 +107,8 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
       </div>
     </form>
   </main>
+<footer>
+    <p>&copy; 2024 Calçar. All rights reserved.</p>
+</footer>
 </body>
 </html>

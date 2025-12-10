@@ -166,7 +166,9 @@ section.recommend-section {
 
 /* ---------- フッター ---------- */
 footer {
-  background-color: #000;
-  height: 80px;
-  margin-top: 40px;
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #000;
+    color: #fff;
+    /* 背景色なし */
 }
