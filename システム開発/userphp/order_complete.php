@@ -91,5 +91,8 @@ try {
 
         <button class="confirm-btn" onclick="location.href='index.php'">ホーム画面に戻る</button>
     </div>
+<footer>
+    <p>&copy; 2024 Calçar. All rights reserved.</p>
+</footer>
 </body>
 </html>
