@@ -3,10 +3,10 @@ session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require_once '../システム開発/require/db-connect.php';
-require '../システム開発/require/navigation.php';
+require_once '../require/db-connect.php';
+require '../require/navigation.php';
 // URLパラメータからサイズ取得（デフォルトは22.5）
-$size_param = $_GET['size'] ?? '27.5';
+$size_param = $_GET['size'] ?? '23';
 
 // 内部コードに変換（22.5 → 22A）
 $code = str_replace('.5', 'A', $size_param);
@@ -36,10 +36,11 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calçar | <?= htmlspecialchars($display_size, ENT_QUOTES, 'UTF-8') ?></title>
     
-    <link rel="stylesheet" href="../システム開発/require.css/navigation.css">
+    <link rel="stylesheet" href="../require.css/navigation.css">
     <link rel="stylesheet" href="../shoze_css/shoze_size.css">
 </head>
 <body>
+
 
 
 <main>
@@ -50,12 +51,12 @@ try {
             <?php foreach($products as $p): ?>
                 <div class="product">
                     <!-- 商品画像をクリックで詳細ページへ -->
-                    <a href="product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>">
+                    <a href="../userphp/product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>">
                         <img src="<?= htmlspecialchars($p['image_url'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?>">
                     </a>
 
                     <!-- 商品名もクリックできる -->
-                    <a href="product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>" class="product-name-link">
+                    <a href="../userphp/product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>" class="product-name-link">
                         <div class="product-brand"><?= htmlspecialchars($p['brand'], ENT_QUOTES, 'UTF-8') ?></div>
                         <div class="product-name"><?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?></div>
                     </a>

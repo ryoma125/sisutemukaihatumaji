@@ -21,22 +21,22 @@ $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     <aside class="sidebar">
       <h2>サイズ</h2>
       <div class="size-buttons">
-        <a href="../../shoze_size/22Asize.php"><button>22.5cm</button></a>
-        <a href="../../shoze_size/23size.php"><button>23.0cm</button></a>
-        <a href="../../shoze_size/23Asize.php"><button>23.5cm</button></a>
-        <a href="../../shoze_size/24size.php"><button>24.0cm</button></a>
-        <a href="../../shoze_size/24Asize.php"><button>24.5cm</button></a>
-        <a href="../../shoze_size/25size.php"><button>25.0cm</button></a>
-        <a href="../../shoze_size/25Asize.php"><button>25.5cm</button></a>
-        <a href="../../shoze_size/26size.php"><button>26.0cm</button></a>
-        <a href="../../shoze_size/26Asize.php"><button>26.5cm</button></a>
-        <a href="../../shoze_size/27size.php"><button>27.0cm</button></a>
-        <a href="../../shoze_size/27Asize.php"><button>27.5cm</button></a>
-        <a href="../../shoze_size/28size.php"><button>28.0cm</button></a>
-        <a href="../../shoze_size/28Asize.php"><button>28.5cm</button></a>
-        <a href="../../shoze_size/29size.php"><button>29.0cm</button></a>
-        <a href="../../shoze_size/29Asize.php"><button>29.5cm</button></a>
-        <a href="../../shoze_size/30size.php"><button>30.0cm</button></a>
+        <a href="../shoze_size/22Asize.php"><button>22.5cm</button></a>
+        <a href="../shoze_size/23size.php"><button>23.0cm</button></a>
+        <a href="../shoze_size/23Asize.php"><button>23.5cm</button></a>
+        <a href="../shoze_size/24size.php"><button>24.0cm</button></a>
+        <a href="../shoze_size/24Asize.php"><button>24.5cm</button></a>
+        <a href="../shoze_size/25size.php"><button>25.0cm</button></a>
+        <a href="../shoze_size/25Asize.php"><button>25.5cm</button></a>
+        <a href="../shoze_size/26size.php"><button>26.0cm</button></a>
+        <a href="../shoze_size/26Asize.php"><button>26.5cm</button></a>
+        <a href="../shoze_size/27size.php"><button>27.0cm</button></a>
+        <a href="../shoze_size/27Asize.php"><button>27.5cm</button></a>
+        <a href="../shoze_size/28size.php"><button>28.0cm</button></a>
+        <a href="../shoze_size/28Asize.php"><button>28.5cm</button></a>
+        <a href="../shoze_size/29size.php"><button>29.0cm</button></a>
+        <a href="../shoze_size/29Asize.php"><button>29.5cm</button></a>
+        <a href="../shoze_size/30size.php"><button>30.0cm</button></a>
       </div>
     </aside>
  
