@@ -36,7 +36,7 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calçar | <?= htmlspecialchars($display_size, ENT_QUOTES, 'UTF-8') ?></title>
     
-    <link rel="stylesheet" href="../システム開発/require.css/navigation.css">
+    <link rel="stylesheet" href="../require.css/navigation.css">
     <link rel="stylesheet" href="../shoze_css/shoze_size.css">
 </head>
 <body>
