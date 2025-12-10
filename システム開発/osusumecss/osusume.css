@@ -44,12 +44,14 @@ body {
 }
 
 .product img {
-  width: 200px;
+  width: 100%;          /* ← 幅を100%に */
+  height: 300px;        /* ← 高さを固定（お好みで調整） */
+  object-fit: cover;    /* ← coverのまま（画像を枠に合わせて切り取る） */
   border-radius: 10px;
   transition: transform 0.3s ease;
   cursor: pointer;
+  display: block; 
 }
-
 .product img:hover {
   transform: scale(1.05);
 }
