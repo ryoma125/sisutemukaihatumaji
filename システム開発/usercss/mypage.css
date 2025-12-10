@@ -283,3 +283,11 @@ header {
 .cancel-btn:hover {
   background-color: #777;
 }
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #000;
+    color: #fff;
+    /* 背景色なし */
+}

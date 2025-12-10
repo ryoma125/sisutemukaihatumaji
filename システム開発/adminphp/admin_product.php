@@ -154,9 +154,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
       <div class="info-section">
-        <h3>商品コード定義</h3>
         <div class="code-info">
           <div class="left">
+            <h3>商品コード定義</h3>
             <p>カテゴリー カラー サイズ 素材</p>
             <p><strong>例）1-BLA-26A-LEA</strong></p>
             <p>　　春　黒　26.5　レザー</p>

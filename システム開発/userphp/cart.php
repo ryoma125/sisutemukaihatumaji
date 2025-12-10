@@ -1,7 +1,6 @@
 <?php
 session_start();
 require "../require/db-connect.php";
-require '../require/navigation.php';
 
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
@@ -25,6 +24,7 @@ if (isset($_POST['remove'])) {
     header("Location: cart.php");
     exit;
 }
+require '../require/navigation.php';
 
 // ========================
 // カート取得（JOIN Product）

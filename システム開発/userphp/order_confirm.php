@@ -37,5 +37,8 @@ $pdo = new PDO($connect, USER, PASS);
         </div>
     </form>
 </div>
+<footer>
+    <p>&copy; 2024 Calçar. All rights reserved.</p>
+</footer>
 </body>
 </html>
