@@ -261,3 +261,9 @@ legend {
   font-weight: bold;
   font-size: 18px;
 }
+
+.item-info h2 {
+  color: #000;  /* 黒 */
+  font-size: 22px;
+  font-weight: 500;
+}

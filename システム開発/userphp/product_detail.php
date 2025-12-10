@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 require_once '../require/db-connect.php';
 require '../require/navigation.php';
@@ -56,7 +56,6 @@ $materialList = [
 
 $colorName = $colorList[$colorCode] ?? "ー";
 $materialName = $materialList[$materialCode] ?? "ー";
-
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -67,27 +66,14 @@ $materialName = $materialList[$materialCode] ?? "ー";
 </head>
 <body>
 
-  <!-- 省略：ヘッダー部分はそのまま -->
-
 <main class="main">
   <div class="left">
 
-    <!-- 商品画像スライダー -->
-    <div class="image-slider">
-      <div class="slides">
-        <img src="<?= htmlspecialchars($product['image_url']) ?>" class="product-img active">
+    <!-- 商品画像（スライダーなし） -->
+  <div class="image">
+    <img src="<?= htmlspecialchars($product['image_url']) ?>" class="product-img">
+  </div>
 
-        <!-- 2,3枚目は product_code ベースの画像 -->
-        <img src="images/<?= htmlspecialchars($product['product_code']) ?>_2.jpg" class="product-img">
-        <img src="images/<?= htmlspecialchars($product['product_code']) ?>_3.jpg" class="product-img">
-      </div>
-
-      <div class="dots">
-        <span class="active"></span>
-        <span></span>
-        <span></span>
-      </div>
-    </div>
 
     <!-- 商品情報 -->
     <div class="product-info-under">
@@ -131,28 +117,6 @@ $materialName = $materialList[$materialCode] ?? "ー";
   </div>
 </main>
 
-<script>
-// 画像スライド（そのまま）
-const images = document.querySelectorAll('.product-img');
-const dots = document.querySelectorAll('.dots span');
-let current = 0;
-function showSlide(index) {
-  images.forEach((img, i) => {
-    img.classList.toggle('active', i === index);
-    dots[i].classList.toggle('active', i === index);
-  });
-}
-dots.forEach((dot, i) => {
-  dot.addEventListener('click', () => {
-    current = i;
-    showSlide(i);
-  });
-});
-setInterval(() => {
-  current = (current + 1) % images.length;
-  showSlide(current);
-}, 3000);
-</script>
 <footer></footer>
 </body>
 </html>

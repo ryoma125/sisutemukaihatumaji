@@ -20,16 +20,32 @@ $results = [];
 
 if (!empty($keywords)) {
 
-    $sql = "SELECT * FROM Product WHERE ";
+    // ========= 重複商品を1つだけにする ==========
+    // Productテーブルから product_name ごとに最小 product_id の商品だけを抽出し、
+    // そこに検索条件を適用する方式
+
+    $sql = "
+        SELECT p.*
+        FROM Product p
+        INNER JOIN (
+            SELECT product_name, MIN(product_id) AS min_id
+            FROM Product
+            GROUP BY product_name
+        ) AS uniq
+            ON uniq.min_id = p.product_id
+        WHERE 
+    ";
+
+    // キーワードごとの条件
     $conditions = [];
     $params = [];
 
     foreach ($keywords as $i => $kw) {
         $conditions[] = "(
-            product_name LIKE :kw$i OR
-            product_code LIKE :kw$i OR
-            brand LIKE :kw$i OR
-            size LIKE :kw$i
+            p.product_name LIKE :kw$i OR
+            p.product_code LIKE :kw$i OR
+            p.brand LIKE :kw$i OR
+            p.size LIKE :kw$i
         )";
         $params[":kw$i"] = "%$kw%";
     }
@@ -53,7 +69,6 @@ if (!empty($keywords)) {
     <title>検索結果 | Calçar</title>
     <script src="../js/search_suggest.js"></script>
 
-    <!-- 🔽 カードデザイン用CSS -->
     <style>
         body {
             font-family: "Arial", sans-serif;
@@ -95,6 +110,7 @@ if (!empty($keywords)) {
             font-size: 16px;
             margin: 8px 0;
             font-weight: bold;
+            display: block;
         }
 
         .product-info {
@@ -124,7 +140,6 @@ if (!empty($keywords)) {
     <?php foreach ($results as $item): ?>
         <div class="product-card">
 
-            <!-- 🔽 画像クリックで商品詳細へ -->
             <a href="product_detail.php?id=<?= $item['product_id'] ?>">
                 <?php if (!empty($item['image_url'])): ?>
                     <img src="<?= htmlspecialchars($item['image_url']) ?>" alt="商品画像">
@@ -133,7 +148,6 @@ if (!empty($keywords)) {
                 <?php endif; ?>
             </a>
 
-            <!-- 🔽 商品名もリンクにする -->
             <a href="product_detail.php?id=<?= $item['product_id'] ?>" class="product-name">
                 <?= htmlspecialchars($item['product_name']) ?>
             </a>
