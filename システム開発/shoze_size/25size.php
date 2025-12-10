@@ -36,12 +36,11 @@ try {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calçar | <?= htmlspecialchars($display_size, ENT_QUOTES, 'UTF-8') ?></title>
     
-    <link rel="stylesheet" href="../システム開発/require.css/navigation.css">
+    <link rel="stylesheet" href="../require.css/navigation.css">
     <link rel="stylesheet" href="../shoze_css/shoze_size.css">
 </head>
 <body>
 
-<?php require '../システム開発/require/navigation.php'; ?>
 
 <main>
     <h1><?= htmlspecialchars($display_size, ENT_QUOTES, 'UTF-8') ?> サイズ</h1>
@@ -51,12 +50,12 @@ try {
             <?php foreach($products as $p): ?>
                 <div class="product">
                     <!-- 商品画像をクリックで詳細ページへ -->
-                    <a href="product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>">
+                    <a href="../userphp/product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>">
                         <img src="<?= htmlspecialchars($p['image_url'], ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?>">
                     </a>
 
                     <!-- 商品名もクリックできる -->
-                    <a href="product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>" class="product-name-link">
+                    <a href="../userphp/product_detail.php?id=<?= htmlspecialchars($p['product_id'], ENT_QUOTES, 'UTF-8') ?>" class="product-name-link">
                         <div class="product-brand"><?= htmlspecialchars($p['brand'], ENT_QUOTES, 'UTF-8') ?></div>
                         <div class="product-name"><?= htmlspecialchars($p['product_name'], ENT_QUOTES, 'UTF-8') ?></div>
                     </a>
