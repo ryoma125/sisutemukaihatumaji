@@ -28,10 +28,10 @@ require "../require/db-connect.php";
     <?php
     // ★ 固定商品の配列（DBは使わない）
     $products = [
-      ["id" => 101, "img" => "../jpg/17.png",  "name" => "サンダル",         "price" => 2500],
-      ["id" => 102, "img" => "../jpg/20.png", "name" => "黒靴",          "price" => 3200],
-      ["id" => 103, "img" => "../jpg/23.png", "name" => "白靴",          "price" => 2800],
-      ["id" => 104, "img" => "../jpg/13.png",   "name" => "カラフルサンダル", "price" => 3000]
+      ["id" => 101, "img" => "../jpg/58.png",  "name" => "kuronagakutu",         "price" => 4000],
+      ["id" => 102, "img" => "../jpg/59.png", "name" => "sironagakutu",          "price" => 6200],
+      ["id" => 103, "img" => "../jpg/60.png", "name" => "kuro-am",          "price" => 5000],
+      ["id" => 104, "img" => "../jpg/56.png",   "name" => "bulu-kutu", "price" => 5000]
     ];
 
     foreach ($products as $product) {

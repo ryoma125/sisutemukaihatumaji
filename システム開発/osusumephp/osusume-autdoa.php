@@ -27,10 +27,10 @@ require "../require/db-connect.php";
   <div class="product-list">
     <?php
     $products = [
-      ["id" => 105, "img" => "../jpg/43.png", "name" => "", "price" => 2500],
-      ["id" => 106, "img" => "../jpg/44.png", "name" => "", "price" => 3200],
-      ["id" => 107, "img" => "../jpg/5.png", "name" => "", "price" => 2800],
-      ["id" => 108, "img" => "../jpg/2.png", "name" => "", "price" => 3000]
+      ["id" => 105, "img" => "../jpg/43.png", "name" => "kuro-bu-tu", "price" => 12500],
+      ["id" => 106, "img" => "../jpg/44.png", "name" => "autdoa-bu", "price" => 13200],
+      ["id" => 107, "img" => "../jpg/53.png", "name" => "buraun", "price" => 12800],
+      ["id" => 108, "img" => "../jpg/52.png", "name" => "yamanobori", "price" => 13000]
     ];
 
     foreach ($products as $product) {
