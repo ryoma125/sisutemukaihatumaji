@@ -7,7 +7,7 @@ try {
     $pdo = new PDO($connect, USER, PASS);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // 商品ID取得
+    // 商品ID取得（GETでサイズ変更時に切替）
     $id = isset($_GET['id']) ? intval($_GET['id']) : 1;
 
     // メイン商品取得
@@ -27,19 +27,14 @@ try {
 
 /* ---------------------------------------------------
    product_code を分解
-   例: 2-WHT-22A-SYN
 --------------------------------------------------- */
 $codeParts = explode("-", $product["product_code"]);
 $itemNo     = $codeParts[0] ?? "";
 $colorCode  = $codeParts[1] ?? "";
-$sizeCode   = $codeParts[2] ?? "";  // 今の商品サイズ
+$sizeCode   = $codeParts[2] ?? "";
 $materialCode = $codeParts[3] ?? "";
 
-/* ---------------------------------------------------
-   サイズ変換関数
-   DB: 22 → 22.0
-       22A → 22.5
---------------------------------------------------- */
+/* サイズ変換関数 */
 function convertSize($raw)
 {
     if (strtoupper(substr($raw, -1)) === "A") {
@@ -48,22 +43,18 @@ function convertSize($raw)
     return floatval($raw);
 }
 
-/* ---------------------------------------------------
-   同シリーズ（色・番号・素材が同じ）サイズ一覧取得
---------------------------------------------------- */
+/* 同シリーズサイズ一覧取得 */
 $pattern = $itemNo . "-" . $colorCode . "-%-" . $materialCode;
 
 $stmt2 = $pdo->prepare("
-    SELECT product_id, size 
+    SELECT product_id, size, product_code
     FROM Product
     WHERE product_code LIKE :code
     ORDER BY size
 ");
 $stmt2->bindValue(':code', $pattern);
 $stmt2->execute();
-
 $sizeItems = $stmt2->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -91,58 +82,45 @@ $sizeItems = $stmt2->fetchAll(PDO::FETCH_ASSOC);
       </div>
 
       <div class="info-right">
-
         <!-- サイズ選択 -->
         <div class="size-area">
-          <label for="size">サイズ選択</label>
-          <form action="cart_insert.php" method="POST">
-              <select id="size" name="product_id">
-                  <?php foreach ($sizeItems as $item): ?>
-                    <option value="<?= $item['product_id'] ?>"
-                      <?= ($item['product_id'] == $product['product_id']) ? 'selected' : '' ?>>
-                        <?= convertSize($item['size']) ?>
-                    </option>
-                  <?php endforeach; ?>
-              </select>
-
-              <button type="submit" class="cart-btn">カートに入れる</button>
+          <!-- GETでid送信してページ再読み込み -->
+          <form action="product_detail.php" method="GET">
+            <label for="size">サイズ選択</label>
+            <select id="size" name="id" onchange="this.form.submit()">
+              <?php foreach ($sizeItems as $item): ?>
+                <option value="<?= $item['product_id'] ?>"
+                  <?= ($item['product_id'] == $product['product_id']) ? 'selected' : '' ?>>
+                  <?= convertSize($item['size']) ?>
+                </option>
+              <?php endforeach; ?>
+            </select>
           </form>
 
+          <!-- カートボタンは元のまま -->
+          <form action="cart_insert.php" method="POST">
+            <input type="hidden" name="product_id" value="<?= $product['product_id'] ?>">
+            <button type="submit" class="cart-btn">カートに入れる</button>
+          </form>
         </div>
-
       </div>
     </div>
   </div>
 
   <!-- 右側：商品説明・詳細 -->
   <div class="right">
-
     <div class="description">
       <p><?= nl2br(htmlspecialchars($product['description'])) ?></p>
     </div>
 
     <?php
-    // カラー名変換
     $colorList = [
-      "BLA" => "黒",
-      "WHT" => "白",
-      "RED" => "赤",
-      "BLU" => "青",
-      "GRN" => "緑",
-      "BRN" => "茶",
-      "BEI" => "ベージュ",
-      "GRY" => "グレー",
-      "YEL" => "黄",
+      "BLA" => "黒","WHT" => "白","RED" => "赤","BLU" => "青",
+      "GRN" => "緑","BRN" => "茶","BEI" => "ベージュ","GRY" => "グレー","YEL" => "黄"
     ];
-
-    // 素材名変換
     $materialList = [
-      "LEA" => "レザー",
-      "FAB" => "ファブリック",
-      "MSH" => "メッシュ",
-      "SYN" => "合成皮革",
+      "LEA" => "レザー","FAB" => "ファブリック","MSH" => "メッシュ","SYN" => "合成皮革"
     ];
-
     $colorName = $colorList[$colorCode] ?? "ー";
     $materialName = $materialList[$materialCode] ?? "ー";
     ?>
@@ -152,13 +130,11 @@ $sizeItems = $stmt2->fetchAll(PDO::FETCH_ASSOC);
       <tr><th>カテゴリ</th><td><?= htmlspecialchars($product['category']) ?></td></tr>
       <tr><th>カラー</th><td><?= htmlspecialchars($colorName) ?></td></tr>
       <tr><th>素材</th><td><?= htmlspecialchars($materialName) ?></td></tr>
+      <!-- 選択されたサイズに応じた商品コードに自動で切り替わる -->
       <tr><th>商品コード</th><td><?= htmlspecialchars($product['product_code']) ?></td></tr>
-      <tr><th>現在のサイズ</th><td><?= convertSize($sizeCode) ?></td></tr>
     </table>
-
   </div>
 </main>
 
-<footer></footer>
-</body>
+
 </html>

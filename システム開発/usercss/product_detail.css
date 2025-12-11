@@ -1,3 +1,28 @@
+/* ==========================
+   左カラム全体を右寄せ
+========================== */
+.left {
+  padding-left: 20px; /* 左側余白を追加して右にずらす */
+}
+
+/* ==========================
+   サイズ選択フォームをさらに右寄せ
+========================== */
+.size-area form {
+  display: flex;
+  flex-direction: column; /* 縦並び */
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 10px;
+  padding-left: 40px; /* サイズ選択部分だけ少し右に寄せる */
+}
+
+
+
+/* ==========================
+   （既存CSSはそのまま）
+========================== */
+
 /* 全体レイアウト */
 body {
   font-family: "Helvetica Neue", Arial, sans-serif;
@@ -15,16 +40,12 @@ main.main {
   gap: 40px;
 }
 
-/* 左側：画像と商品情報 */
-.left {
+.left, .right {
   flex: 1;
 }
 
-/* ================================
-   PHP の <div class="image"> に合わせる
-================================ */
+/* 商品画像 */
 .image {
-  position: relative;
   width: 100%;
   max-width: 320px;
   height: 320px;
@@ -43,7 +64,7 @@ main.main {
 .product-info-under {
   display: flex;
   justify-content: space-between;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .info-left {
@@ -56,8 +77,6 @@ main.main {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  max-width: 100%;
-  display: block;
 }
 
 .price,
@@ -66,33 +85,21 @@ main.main {
   margin: 4px 0;
 }
 
-/* 右寄せされていた info-right を左基準に戻したい場合は text-align: left にしてよい */
-/* 今回はそのままにしておく */
 .info-right {
   flex: 1;
   text-align: right;
 }
 
-/* ============================
-   サイズ選択の並び調整（重要）
-   ▼ プルダウン → ラベル の順に並べる
-============================ */
-.size-area {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;      /* スペースを設定 */
-  justify-content: flex-start;
-}
-
-/* プルダウンを左へ */
-.size-area select {
-  order: 0;
-}
-
-/* ラベルを右へ */
+/* サイズ選択とボタン */
 .size-area label {
-  order: 1;
+  font-weight: bold;
+}
+
+.size-area select {
+  width: 150px;
+  padding: 6px 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 
 .cart-btn {
@@ -109,12 +116,7 @@ main.main {
   background-color: #555;
 }
 
-/* 右側：商品説明・詳細 */
-.right {
-  flex: 1;
-}
-
-/* 説明部分を四角で囲む＋位置を下げる */
+/* 商品説明 */
 .description {
   border: 1px solid #ccc;
   border-radius: 6px;
@@ -150,7 +152,22 @@ main.main {
   background-color: #fff;
 }
 
-/* 行ごとに交互の背景色 */
 .detail-table tr:nth-child(even) td {
   background-color: #fafafa;
+}
+
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 768px) {
+  main.main {
+    flex-direction: column;
+    gap: 20px;
+  }
+  .info-right {
+    text-align: left;
+  }
+  .size-area select,
+  .cart-btn {
+    width: 100%;
+  }
 }

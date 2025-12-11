@@ -96,7 +96,7 @@ foreach ($cart_items as $item) {
   <?php endif; ?>
 
 </div>
-<footer></footer>
+<footer>  <p>&copy; 2024 Calçar. All rights reserved.</p></footer>
 
 </body>
 </html>

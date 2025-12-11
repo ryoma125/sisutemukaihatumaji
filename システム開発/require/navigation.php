@@ -1,16 +1,17 @@
 <?php
 // navigation.php
 ?>
-<link rel="stylesheet" href="../require.css/navigation.css">
+<link rel="stylesheet" href="/2025/GitHub/sisutemukaihatumaji/システム開発/require.css/navigation.css">
 <header>
   <div class="logo">Calçar</div>
 
   <nav class="nav">
     <div class="line"></div>
-    <a href="./index.php">Home/Calçar</a>
+    <a href="/2025/GitHub/sisutemukaihatumaji/システム開発/userphp/index.php">Home/Calçar</a>
     <div class="line"></div>
 
-    <form class="nav-search" method="get" action="search.php" style="position: relative;">
+    <form class="nav-search" method="get" action="search.php">
+
       <label for="nav-search-input" class="sr-only">検索ワード</label>
 
       <input 
@@ -29,12 +30,12 @@
   </nav>
 
   <div class="icons">
-    <a href="mypage.php" class="icon">👤</a>
-    <a href="cart.php" class="icon">🛒</a> 
+    <a href="/2025/GitHub/sisutemukaihatumaji/システム開発/userphp/mypage.php" class="icon">👤</a>
+    <a href="/2025/GitHub/sisutemukaihatumaji/システム開発/userphp/cart.php" class="icon">🛒</a> 
   </div>
 </header>
 
-<script src="../js/search_suggest.js"></script>
+<script src="/2025/GitHub/sisutemukaihatumaji/システム開発/js/search_suggest.js"></script>
 
 <style>
 .suggest-area {
