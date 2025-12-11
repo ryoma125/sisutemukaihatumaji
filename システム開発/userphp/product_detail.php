@@ -136,6 +136,5 @@ $sizeItems = $stmt2->fetchAll(PDO::FETCH_ASSOC);
   </div>
 </main>
 
-<footer></footer>
-</body>
+
 </html>
