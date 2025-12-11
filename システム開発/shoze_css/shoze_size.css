@@ -30,13 +30,14 @@ h1 {
 }
 
 /* ==============================
-   商品グリッド
+   商品グリッド（4列固定）
    ============================== */
 .product-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(4, 1fr); /* ← ここで4列固定 */
     gap: 1.5rem;
-    justify-content: start; /* カード全体を左寄せに配置 */
+    width: 100%;
+    justify-items: stretch;
 }
 
 /* ==============================
@@ -141,7 +142,7 @@ h1 {
 footer {
     text-align: center;
     padding: 1rem 0;
-    background-color: #000; /* コメント修正 */
+    background-color: #000;
     color: #fff;
 }
 
@@ -149,12 +150,20 @@ footer {
    レスポンシブ対応
    ============================== */
 @media (max-width: 900px) {
+    /* タブレット → 2列 */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
     .product img {
         height: 200px;
     }
 }
 
 @media (max-width: 600px) {
+    /* スマホ → 1列 */
+    .product-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
     .product img {
         height: 180px;
     }
