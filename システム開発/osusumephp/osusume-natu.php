@@ -27,10 +27,10 @@ require "../require/db-connect.php";
   <div class="product-list">
     <?php
     $products = [
-      ["id" => 117, "img" => "../jpg/48.png", "name" => "黒靴", "price" => 2500],
-      ["id" => 118, "img" => "../jpg/49.png", "name" => "サンダル", "price" => 3200],
-      ["id" => 119, "img" => "../jpg/50.png", "name" => "白靴", "price" => 2800],
-      ["id" => 120, "img" => "../jpg/51.png", "name" => "カラフルサンダル", "price" => 3000]
+      ["id" => 1008, "img" => "../jpg/48.png", "name" => "ダークサンダル", "price" => 2500],
+      ["id" => 1009, "img" => "../jpg/49.png", "name" => "ブラウンサンダル", "price" => 3200],
+      ["id" => 1010, "img" => "../jpg/50.png", "name" => "ホワイトサンダル", "price" => 2800],
+      ["id" => 1011, "img" => "../jpg/51.png", "name" => "カラフルクロックス", "price" => 3000]
     ];
 
     foreach ($products as $product) {
@@ -38,7 +38,7 @@ require "../require/db-connect.php";
       echo '<form method="POST" action="../userphp/cart_insert.php" class="product">';
  
       // 画像リンク
-      echo '<a href="product_detail.php?id=' . $product["id"] . '">';
+      echo '<a href="../userphp/product_detail.php?id=' . $product["id"] . '">';
       echo '<img src="' . htmlspecialchars($product["img"]) . '" alt="靴">';
       echo '</a>';
  
